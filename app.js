@@ -328,7 +328,7 @@ function renderReview() {
             </div>
             ${s.spotify_url 
   ? `<a class="btn secondary" href="${escapeHtml(s.spotify_url)}" target="_blank" rel="noopener">Open Spotify</a>`
-  : `<button class="btn secondary" onclick="updateSongSpotify('${s.id}', prompt('Paste Spotify track URL'))">Add Spotify Link</button>`
+: `<button class="btn secondary" onclick="openSpotifyLinkDialog('${s.id}')">Add Spotify Link</button>`
 }
           </article>
         `).join("")}
@@ -355,7 +355,30 @@ async function publishRanking(id) {
   await loadAll();
   go("/avia/dashboard");
 }
+function openSpotifyLinkDialog(songId) {
+  const existing = document.getElementById("spotifyLinkDialog");
+  if (existing) existing.remove();
 
+  document.getElementById("app").insertAdjacentHTML("beforeend", `
+    <div id="spotifyLinkDialog" class="dialog-backdrop">
+      <div class="dialog-card">
+        <h2>Add Spotify Track</h2>
+        <p>Paste the Spotify track URL for this song.</p>
+        <input id="spotifyLinkInput" placeholder="Spotify track URL" />
+        <div class="button-row">
+          <button class="btn primary" onclick="saveSpotifyLink('${songId}')">Save</button>
+          <button class="btn secondary" onclick="document.getElementById('spotifyLinkDialog').remove()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  `);
+}
+
+function saveSpotifyLink(songId) {
+  const input = document.getElementById("spotifyLinkInput");
+  updateSongSpotify(songId, input.value);
+  document.getElementById("spotifyLinkDialog").remove();
+}
 function renderRate() {
   const r = state.rankings.find(x => x.id === state.params.id);
   if (!r) return renderDashboard();
