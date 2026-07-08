@@ -523,6 +523,7 @@ function renderResults() {
   const rows = calculateResults(r.id);
   renderShell("Results", "Save the best for last.", `
     <section class="card">
+    ${r.spotify_playlist_url ? `<button class="btn primary" onclick="window.open('${escapeHtml(r.spotify_playlist_url)}', '_blank')">Open Spotify Playlist</button>` : ""}
       <div class="list">
         ${rows.map((s, i) => `
           <article class="row song-row">
