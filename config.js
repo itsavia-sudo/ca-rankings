@@ -2,5 +2,6 @@
 // Before publishing, replace these two values with your Supabase project values.
 window.CA_CONFIG = {
   SUPABASE_URL: "https://puiybuxbphzrvlhdrprj.supabase.co",
-  SUPABASE_ANON_KEY: "sb_publishable_ypkcE3mHZN9eZtriyt-rTA_pRfRCfVH"
+  SUPABASE_ANON_KEY: "sb_publishable_ypkcE3mHZN9eZtriyt-rTA_pRfRCfVH",
+  SPOTIFY_SEARCH_FUNCTION_URL: "https://puiybuxbphzrvlhdrprj.supabase.co/functions/v1/spotify-search"
 };
