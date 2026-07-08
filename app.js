@@ -191,8 +191,8 @@ function renderRankingCard(r) {
   } else if (r.status === "in_progress") {
 const actionLabel = state.role === "chen" && chenRated === 0 ? "Start Rating" : state.role === "avia" && aviaRated === count ? "Edit Scores" : "Continue Rating";
 action = `<button class="btn primary" onclick="go('/${target}/rate/${r.id}')">${actionLabel}</button>`;
-    action = `<button class="btn primary" onclick="go('/avia/reveal/${r.id}')">Reveal Results</button>`;
-  } else if (r.status === "revealed") {
+} else if (state.role === "avia" && r.status === "ready_to_reveal") {
+  action = `<button class="btn primary" onclick="go('/avia/reveal/${r.id}')">Reveal Results</button>`;  } else if (r.status === "revealed") {
     action = `<button class="btn secondary" onclick="go('/${state.role}/results/${r.id}')">View Results</button>`;
   }
   return `
