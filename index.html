@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>C&A Rankings</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="top-nav">
+    <a class="brand" href="./index.html" aria-label="C&A Rankings home">
+      <span>C</span><span class="amp">&amp;</span><span>A</span> Rankings
+    </a>
+    <nav id="navLinks" class="nav-links"></nav>
+  </header>
+
+  <main id="app" class="app-shell"></main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./config.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
