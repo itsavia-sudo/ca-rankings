@@ -479,7 +479,7 @@ function confirmReveal(id) {
   const existing = document.getElementById("confirmRevealDialog");
   if (existing) existing.remove();
 
-  document.body.insertAdjacentHTML("beforeend", `
+  document.getElementById("app").insertAdjacentHTML("beforeend", ` 
     <div id="confirmRevealDialog" class="dialog-backdrop">
       <div class="dialog-card">
         <h2>Reveal Results?</h2>
