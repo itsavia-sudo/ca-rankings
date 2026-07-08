@@ -168,8 +168,7 @@ function renderDashboard() {
       <div class="card action">
         <h2>Needs Your Attention</h2>
         <div class="list">
-          ${attention.length ? attention.map(renderRankingCard).join("") : `<p class="helper">Nothing needs your attention right now.</p>`}
-        </div>
+${attention.length ? attention.map(renderRankingCard).join("") : (state.role === "chen" ? `<p class="helper"><strong>Sit tight...</strong><br>The reveal is coming soon.</p>` : `<p class="helper">Nothing needs your attention right now.</p>`)}        </div>
       </div>
       <div class="card tip-card">
         <h2>${tip}</h2>
