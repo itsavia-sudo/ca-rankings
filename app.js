@@ -326,7 +326,10 @@ function renderReview() {
               <strong>${escapeHtml(s.title)}</strong>
               <div class="song-meta">${escapeHtml(s.artist || "")}</div>
             </div>
-            <input value="${escapeHtml(s.spotify_url || "")}" placeholder="Spotify track URL" onchange="updateSongSpotify('${s.id}', this.value)" />
+            ${s.spotify_url 
+  ? `<a class="btn secondary" href="${escapeHtml(s.spotify_url)}" target="_blank" rel="noopener">Open Spotify</a>`
+  : `<button class="btn secondary" onclick="updateSongSpotify('${s.id}', prompt('Paste Spotify track URL'))">Add Spotify Link</button>`
+}
           </article>
         `).join("")}
       </div>
