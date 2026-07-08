@@ -276,7 +276,26 @@ function parseSongs(raw, type, artistName) {
       return { title: line, artist: artistName || "", import_order: idx + 1 };
     });
 }
+async function findSpotifyUrlForSong(song) {
+  if (!window.CA_CONFIG?.SPOTIFY_SEARCH_FUNCTION_URL) return null;
 
+  const query = `${song.title} ${song.artist || ""}`.trim();
+
+  const response = await fetch(window.CA_CONFIG.SPOTIFY_SEARCH_FUNCTION_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${window.CA_CONFIG.SUPABASE_ANON_KEY}`,
+      "apikey": window.CA_CONFIG.SUPABASE_ANON_KEY
+    },
+    body: JSON.stringify({ query })
+  });
+
+  if (!response.ok) return null;
+
+  const data = await response.json();
+  return data.tracks?.[0]?.spotifyUrl || null;
+}
 async function createRanking(event) {
   event.preventDefault();
   const name = document.getElementById("rankingName").value.trim();
@@ -290,9 +309,19 @@ async function createRanking(event) {
   }).select().single();
   if (error) return showToast(error.message);
 
-  const { error: songsError } = await supabaseClient.from("songs").insert(
-    songRows.map(s => ({ ...s, ranking_id: ranking.id }))
-  );
+showToast("Finding Spotify tracks...");
+
+const songsWithSpotify = await Promise.all(
+  songRows.map(async (s) => ({
+    ...s,
+    ranking_id: ranking.id,
+    spotify_url: await findSpotifyUrlForSong(s)
+  }))
+);
+
+const { error: songsError } = await supabaseClient
+  .from("songs")
+  .insert(songsWithSpotify);
   if (songsError) return showToast(songsError.message);
 
   showToast("Tracks imported");
