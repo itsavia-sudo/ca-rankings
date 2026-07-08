@@ -528,7 +528,7 @@ function renderResults() {
           <article class="row song-row">
             <div>
               ${s.spotify_url ? `<a class="song-title" href="${escapeHtml(s.spotify_url)}" target="_blank" rel="noopener">${rows.length - i}. ${escapeHtml(s.title)}</a>` : `<span class="song-title">${rows.length - i}. ${escapeHtml(s.title)}</span>`}
-              <div class="song-meta">${escapeHtml(s.artist || "")}${i === rows.length - 1 ? " · Shared Winner" : ""}</div>
+              <div class="song-meta">${escapeHtml(s.artist || "")}</div>
             </div>
             <strong>${s.average.toFixed(2)}</strong>
           </article>
