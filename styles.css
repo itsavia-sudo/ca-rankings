@@ -70,14 +70,14 @@ button, input, textarea, select {
 }
 
 .app-shell {
-  max-width: 1200px;
+  max-width: 1080px;
   margin: 0 auto;
-  padding: 22px 20px 80px;
+  padding: 18px 24px 72px;
 }
 
 .page-title {
-  margin: 26px 0 4px;
-  font-size: clamp(42px, 5vw, 64px);
+  margin: 18px 0 4px;
+  font-size: clamp(36px, 4.2vw, 56px);
   line-height: 0.95;
   letter-spacing: -0.06em;
   color: var(--green);
