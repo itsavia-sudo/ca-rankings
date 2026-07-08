@@ -378,7 +378,7 @@ function renderRate() {
         <strong>${rated} of ${list.length} tracks rated</strong>
       </div>
       <div class="pagination">
-        ${Array.from({length: pageCount}, (_, i) => `<button class="${i+1 === page ? "active" : ""}" onclick="setRatingPage('${r.id}', ${i+1})">${i+1}</button>`).join("")}
+        ${Array.from({length: pageCount}, (_, i) => `<button class="${i+1 === page ? "active" : ""}" onclick="setRatingPage('${r.id}', ${rows.length - i})">${rows.length - i}</button>`).join("")}
       </div>
       <div class="list">
         ${pageSongs.map((s, i) => `
@@ -527,7 +527,7 @@ function renderResults() {
         ${rows.map((s, i) => `
           <article class="row song-row">
             <div>
-              ${s.spotify_url ? `<a class="song-title" href="${escapeHtml(s.spotify_url)}" target="_blank" rel="noopener">${rows.length - i}. ${escapeHtml(s.title)}</a>` : `<span class="song-title">${i+1}. ${escapeHtml(s.title)}</span>`}
+              ${s.spotify_url ? `<a class="song-title" href="${escapeHtml(s.spotify_url)}" target="_blank" rel="noopener">${rows.length - i}. ${escapeHtml(s.title)}</a>` : `<span class="song-title">${rows.length - i}. ${escapeHtml(s.title)}</span>`}
               <div class="song-meta">${escapeHtml(s.artist || "")}${i === rows.length - 1 ? " · Shared Winner" : ""}</div>
             </div>
             <strong>${s.average.toFixed(2)}</strong>
