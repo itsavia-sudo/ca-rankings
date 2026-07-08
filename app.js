@@ -526,8 +526,7 @@ function renderRate() {
       </div>
       <div class="list">
         ${pageSongs.map((s, i) => `
-          ${i === firstUnratedIndex ? `<div class="continue-marker">Continue here</div>` : ""}
-          <article class="row song-row ${scoreBySong[s.id] ? "rated" : ""}">
+${rated > 0 && i === firstUnratedIndex ? `<div class="continue-marker">Continue here</div>` : ""}          <article class="row song-row ${scoreBySong[s.id] ? "rated" : ""}">
             <div>
               ${s.spotify_url ? `<a class="song-title" href="${escapeHtml(s.spotify_url)}" target="_blank" rel="noopener">${escapeHtml(s.title)}</a>` : `<span class="song-title">${escapeHtml(s.title)}</span>`}
               <div class="song-meta">${escapeHtml(s.artist || "")}</div>
