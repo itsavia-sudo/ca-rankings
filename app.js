@@ -476,6 +476,8 @@ function renderReveal() {
   `);
 }
 function confirmReveal(id) {
+  alert("TEST");
+  
   const confirmed = confirm(
     "Reveal Results?\n\nThis action is irreversible.\nOnce revealed, this ranking will become a permanent archive."
   );
