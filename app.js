@@ -217,8 +217,8 @@ function renderCollection() {
             <strong>${escapeHtml(r.name)}</strong>
             ${statusBadge(r.status)}
           </div>
-          <div class="song-meta">${r.type === "artist" ? "Artist Ranking" : "Mixed Playlist"} · ${new Date(r.created_at).toLocaleDateString()}</div>
-          <button class="btn secondary" onclick="go('/${state.role}/results/${r.id}')">Open</button>
+         <div class="song-meta">${r.type === "artist" ? "Artist Ranking" : "Mixed Playlist"} · ${new Date(r.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}</div>
+          <button class="btn secondary" onclick="go('/${state.role}/results/${r.id}')">Open Ranking</button>
         </article>
       `).join("")}</div>` : `
         <h2>Your collection is waiting for its first record.</h2>
