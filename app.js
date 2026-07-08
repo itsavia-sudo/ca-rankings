@@ -491,9 +491,9 @@ async function selectSpotifyTrack(songId, url) {
   document.getElementById("spotifyLinkDialog").remove();
 }
 
-function saveSpotifyLink(songId) {
+async function saveSpotifyLink(songId) {
   const input = document.getElementById("spotifyLinkInput");
-  updateSongSpotify(songId, input.value);
+  await updateSongSpotify(songId, input.value);
   document.getElementById("spotifyLinkDialog").remove();
 }
 function renderRate() {
