@@ -363,7 +363,7 @@ async function publishRanking(id) {
   if (error) return showToast(error.message);
   showToast("Ranking published");
   await loadAll();
-  go("/avia/dashboard");
+  go(`/avia/rate/${id}`);
 }
 function openSpotifyLinkDialog(songId) {
   const existing = document.getElementById("spotifyLinkDialog");
