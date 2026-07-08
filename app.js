@@ -527,7 +527,7 @@ function renderResults() {
         ${rows.map((s, i) => `
           <article class="row song-row">
             <div>
-              ${s.spotify_url ? `<a class="song-title" href="${escapeHtml(s.spotify_url)}" target="_blank" rel="noopener">${i+1}. ${escapeHtml(s.title)}</a>` : `<span class="song-title">${i+1}. ${escapeHtml(s.title)}</span>`}
+              ${s.spotify_url ? `<a class="song-title" href="${escapeHtml(s.spotify_url)}" target="_blank" rel="noopener">${rows.length - i}. ${escapeHtml(s.title)}</a>` : `<span class="song-title">${i+1}. ${escapeHtml(s.title)}</span>`}
               <div class="song-meta">${escapeHtml(s.artist || "")}${i === rows.length - 1 ? " · Shared Winner" : ""}</div>
             </div>
             <strong>${s.average.toFixed(2)}</strong>
