@@ -430,7 +430,7 @@ function openSpotifyLinkDialog(songId) {
         <div id="spotifyManualBox" style="display:none; margin-top:16px;">
           <input id="spotifyLinkInput" placeholder="Spotify track URL" />
           <div class="button-row">
-            <button class="btn primary" onclick="saveSpotifyLink('${songId}')">Save</button>
+         <button class="btn primary" onclick="saveSpotifyLink('${songId}'); document.getElementById('spotifyLinkDialog')?.remove();">Save</button>
           </div>
         </div>
 
