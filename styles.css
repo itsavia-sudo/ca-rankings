@@ -31,9 +31,9 @@ button, input, textarea, select {
 }
 
 .top-nav {
-  max-width: 1200px;
+  max-width: 1180px;
   margin: 0 auto;
-  padding: 22px 20px;
+  padding: 28px 24px 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -43,7 +43,7 @@ button, input, textarea, select {
 .brand {
   color: var(--green);
   text-decoration: none;
-  font-size: 24px;
+  font-size: 34px;
   font-weight: 900;
   letter-spacing: -0.04em;
 }
@@ -76,10 +76,10 @@ button, input, textarea, select {
 }
 
 .page-title {
-  margin: 18px 0 6px;
-  font-size: clamp(38px, 7vw, 78px);
+  margin: 26px 0 4px;
+  font-size: clamp(42px, 5vw, 64px);
   line-height: 0.95;
-  letter-spacing: -0.07em;
+  letter-spacing: -0.06em;
   color: var(--green);
 }
 
