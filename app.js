@@ -476,13 +476,25 @@ function renderReveal() {
   `);
 }
 function confirmReveal(id) {
-  const confirmed = confirm(
-    "Reveal Results?\n\nThis action is irreversible.\nOnce revealed, this ranking will become a permanent archive."
-  );
+  const existing = document.getElementById("confirmRevealDialog");
+  if (existing) existing.remove();
 
-  if (confirmed) {
-    revealRanking(id);
-  }
+  document.body.insertAdjacentHTML("beforeend", `
+    <div id="confirmRevealDialog" class="dialog-backdrop">
+      <div class="dialog-card">
+        <h2>Reveal Results?</h2>
+        <p>This action is irreversible. Once revealed, this ranking will become a permanent archive.</p>
+        <div class="button-row">
+          <button class="btn danger" onclick="revealRanking('${id}'); document.getElementById('confirmRevealDialog').remove();">
+            Reveal Results
+          </button>
+          <button class="btn secondary" onclick="document.getElementById('confirmRevealDialog').remove();">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  `);
 }
 async function revealRanking(id) {
   const { error } = await supabaseClient.from("rankings").update({ status: "revealed", revealed_at: new Date().toISOString() }).eq("id", id);
