@@ -433,12 +433,12 @@ textarea {
   justify-content: flex-end;
   gap: 12px;
 }
-.dialog-card .btn.danger {
+.btn.danger {
   background: #d94f7a;
   border-color: #d94f7a;
 }
 
-.dialog-card .btn.danger:hover {
+.btn.danger:hover {
   background: #c9436d;
   border-color: #c9436d;
 }
