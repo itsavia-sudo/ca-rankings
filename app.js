@@ -601,8 +601,7 @@ async function finishRating(rankingId) {
     await supabaseClient.from("rankings").update({ status: "ready_to_reveal" }).eq("id", rankingId);
     await loadAll();
   }
-  showToast("Rating finished");
-  go(`/${state.role}/dashboard`);
+go(`/${state.role}/ranking-complete`);
 }
 
 function renderReveal() {
@@ -682,7 +681,21 @@ function renderResults() {
     </section>
   `);
 }
-
+function renderRankingComplete() {
+  renderShell(
+    "Ranking Complete",
+    "Your scores have been saved.",
+    `
+      <section class="card">
+        <div class="button-row">
+          <button class="btn primary" onclick="go('/${state.role}/dashboard')">
+            Go to Dashboard
+          </button>
+        </div>
+      </section>
+    `
+  );
+}
 async function router() {
   parseHash();
   supabaseClient = initSupabase();
@@ -703,6 +716,7 @@ async function router() {
   if (state.route === "rate") return renderRate();
   if (state.route === "reveal") return renderReveal();
   if (state.route === "results") return renderResults();
+  if (state.route === "ranking-complete") return renderRankingComplete();
   return renderDashboard();
 }
 
