@@ -469,13 +469,21 @@ function renderReveal() {
       <h2>${escapeHtml(r.name)}</h2>
       <p>After reveal, Chen will be able to see this ranking in her Ranking Collection.</p>
       <div class="button-row">
-        <button class="btn danger" onclick="revealRanking('${r.id}')">Reveal Results</button>
+       <button class="btn danger" onclick="confirmReveal('${r.id}')">Reveal Results</button>
         <button class="btn secondary" onclick="go('/avia/dashboard')">Cancel</button>
       </div>
     </section>
   `);
 }
+function confirmReveal(id) {
+  const confirmed = confirm(
+    "Reveal Results?\n\nThis action is irreversible.\nOnce revealed, this ranking will become a permanent archive."
+  );
 
+  if (confirmed) {
+    revealRanking(id);
+  }
+}
 async function revealRanking(id) {
   const { error } = await supabaseClient.from("rankings").update({ status: "revealed", revealed_at: new Date().toISOString() }).eq("id", id);
   if (error) return showToast(error.message);
