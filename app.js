@@ -355,9 +355,22 @@ function renderReview() {
               <strong>${escapeHtml(s.title)}</strong>
               <div class="song-meta">${escapeHtml(s.artist || "")}</div>
             </div>
-            ${s.spotify_url 
-  ? `<a class="btn secondary" href="${escapeHtml(s.spotify_url)}" target="_blank" rel="noopener">Open Spotify</a>`
-: `<button class="btn secondary" onclick="openSpotifyLinkDialog('${s.id}')">Add Spotify Link</button>`
+${s.spotify_url
+  ? `
+    <div class="button-row">
+      <a class="btn secondary" href="${escapeHtml(s.spotify_url)}" target="_blank" rel="noopener">
+        Open Spotify
+      </a>
+      <button class="btn secondary" onclick="openSpotifyLinkDialog('${s.id}')">
+        Change Link
+      </button>
+    </div>
+  `
+  : `
+      <button class="btn secondary" onclick="openSpotifyLinkDialog('${s.id}')">
+        Add Spotify Link
+      </button>
+    `
 }
           </article>
         `).join("")}
