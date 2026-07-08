@@ -397,7 +397,8 @@ async function updateSongSpotify(songId, url) {
   if (song) song.spotify_url = cleanUrl;
 
   showToast("Spotify track linked");
-  render();
+  closeSpotifyModal();
+render();
 }
 
 async function publishRanking(id) {
