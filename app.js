@@ -342,10 +342,20 @@ function renderReview() {
 }
 
 async function updateSongSpotify(songId, url) {
-  const { error } = await supabaseClient.from("songs").update({ spotify_url: url.trim() || null }).eq("id", songId);
+  const cleanUrl = url.trim();
+
+  const { error } = await supabaseClient
+    .from("songs")
+    .update({ spotify_url: cleanUrl })
+    .eq("id", songId);
+
   if (error) return showToast(error.message);
+
+  const song = state.songs.find(s => s.id === songId);
+  if (song) song.spotify_url = cleanUrl;
+
   showToast("Spotify track linked");
-  await loadAll();
+  render();
 }
 
 async function publishRanking(id) {
