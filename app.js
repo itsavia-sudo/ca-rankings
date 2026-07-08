@@ -479,7 +479,7 @@ function renderRate() {
         <strong>${rated} of ${list.length} tracks rated</strong>
       </div>
       <div class="pagination">
-        ${Array.from({length: pageCount}, (_, i) => `<button class="${i+1 === page ? "active" : ""}" onclick="setRatingPage('${r.id}', ${rows.length - i})">${rows.length - i}</button>`).join("")}
+     ${Array.from({length: pageCount}, (_, i) => `<button class="${i + 1 === page ? "active" : ""}" onclick="setRatingPage('${r.id}', ${i + 1})">${pageCount - i}</button>`).join("")}
       </div>
       <div class="list">
         ${pageSongs.map((s, i) => `
