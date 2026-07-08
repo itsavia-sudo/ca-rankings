@@ -397,7 +397,7 @@ async function updateSongSpotify(songId, url) {
 
 await loadAll();
 showToast("Spotify track linked");
-render();
+router();
 }
 
 async function publishRanking(id) {
