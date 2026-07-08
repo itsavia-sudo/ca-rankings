@@ -362,16 +362,82 @@ function openSpotifyLinkDialog(songId) {
   document.getElementById("app").insertAdjacentHTML("beforeend", `
     <div id="spotifyLinkDialog" class="dialog-backdrop">
       <div class="dialog-card">
-        <h2>Add Spotify Track</h2>
-        <p>Paste the Spotify track URL for this song.</p>
-        <input id="spotifyLinkInput" placeholder="Spotify track URL" />
+        <h2>Find Spotify Track</h2>
+        <p>Search Spotify or paste the track URL manually.</p>
+
+        <input id="spotifySearchInput" placeholder="Song name and artist" />
+
         <div class="button-row">
-          <button class="btn primary" onclick="saveSpotifyLink('${songId}')">Save</button>
+          <button class="btn primary" onclick="searchSpotifyTracks('${songId}')">Search</button>
+          <button class="btn secondary" onclick="document.getElementById('spotifyManualBox').style.display='block'">Paste URL</button>
+        </div>
+
+        <div id="spotifySearchResults"></div>
+
+        <div id="spotifyManualBox" style="display:none; margin-top:16px;">
+          <input id="spotifyLinkInput" placeholder="Spotify track URL" />
+          <div class="button-row">
+            <button class="btn primary" onclick="saveSpotifyLink('${songId}')">Save</button>
+          </div>
+        </div>
+
+        <div class="button-row">
           <button class="btn secondary" onclick="document.getElementById('spotifyLinkDialog').remove()">Cancel</button>
         </div>
       </div>
     </div>
   `);
+}
+
+async function searchSpotifyTracks(songId) {
+  const input = document.getElementById("spotifySearchInput");
+  const resultsBox = document.getElementById("spotifySearchResults");
+  const query = input.value.trim();
+
+  if (!query) {
+    showToast("Type a song name first");
+    return;
+  }
+
+  resultsBox.innerHTML = "<p>Searching Spotify...</p>";
+
+  const response = await fetch(window.CA_CONFIG.SPOTIFY_SEARCH_FUNCTION_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${window.CA_CONFIG.SUPABASE_ANON_KEY}`,
+      "apikey": window.CA_CONFIG.SUPABASE_ANON_KEY
+    },
+    body: JSON.stringify({ query })
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    resultsBox.innerHTML = "<p>Spotify search failed.</p>";
+    return;
+  }
+
+  if (!data.tracks || data.tracks.length === 0) {
+    resultsBox.innerHTML = "<p>No tracks found.</p>";
+    return;
+  }
+
+  resultsBox.innerHTML = data.tracks.map(track => `
+    <div class="song-row" style="margin-top:12px;">
+      <div>
+        <strong>${track.name}</strong><br />
+        <span>${track.artist}</span>
+      </div>
+      <button class="btn secondary" onclick="selectSpotifyTrack('${songId}', '${track.spotifyUrl}')">Use Track</button>
+    </div>
+  `).join("");
+}
+
+async function selectSpotifyTrack(songId, url) {
+  await updateSongSpotify(songId, url);
+  document.getElementById("spotifyLinkDialog").remove();
+}
 }
 
 function saveSpotifyLink(songId) {
