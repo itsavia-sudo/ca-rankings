@@ -395,8 +395,8 @@ async function updateSongSpotify(songId, url) {
   const song = state.songs.find(s => s.id === songId);
   if (song) song.spotify_url = cleanUrl;
 
-  showToast("Spotify track linked");
-  closeSpotifyModal();
+await loadAll();
+showToast("Spotify track linked");
 render();
 }
 
