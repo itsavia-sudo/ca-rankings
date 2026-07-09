@@ -36,16 +36,24 @@ body::before{
   inset:0;
   pointer-events:none;
   z-index:0;
-  background-repeat:no-repeat;
+  background-image:
+    url("/images/SAX.png"),
+    url("/images/DONT LET ME DOWN.png"),
+    url("/images/PIANO.png");
+
+  background-repeat: no-repeat;
+
   background-position:
     left bottom,
     right top,
     right bottom;
+
   background-size:
     230px,
     250px,
     210px;
-  opacity:.22;
+
+  opacity: .22;
 }
 .top-nav {
   max-width: 1180px;
