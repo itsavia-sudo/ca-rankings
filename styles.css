@@ -38,9 +38,9 @@ body::before{
   pointer-events:none;
 z-index:999;
   background-image:
-    url("/images/SAX.png"),
-    url("/images/DONT LET ME DOWN.png"),
-    url("/images/PIANO.png");
+url("/public/images/SAX.png"),
+    url("/public/images/DONT LET ME DOWN.png"),
+    url("/public/images/PIANO.png");
 
   background-repeat: no-repeat;
 
