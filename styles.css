@@ -25,6 +25,7 @@ body {
     radial-gradient(circle at 90% 92%, rgba(47,107,84,0.03), transparent 18rem),
     linear-gradient(180deg, #fffefc 0%, #fffdf9 100%);
   min-height: 100vh;
+position: relative;
 }
 
 button, input, textarea, select {
@@ -35,7 +36,7 @@ body::before{
   position:fixed;
   inset:0;
   pointer-events:none;
-  z-index:0;
+  z-index:-1;
   background-image:
     url("/images/SAX.png"),
     url("/images/DONT LET ME DOWN.png"),
