@@ -80,6 +80,9 @@ function statusBadge(status) {
 
 function renderShell(title, support, content) {
   app.innerHTML = `
+    <div class="decor-art decor-sax"></div>
+    <div class="decor-art decor-record"></div>
+    <div class="decor-art decor-piano"></div>
     <h1 class="page-title">${title}</h1>
     ${support ? `<p class="supporting">${support}</p>` : ""}
     ${content}
