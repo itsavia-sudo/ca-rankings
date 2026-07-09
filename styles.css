@@ -137,8 +137,8 @@ body::before{
 }
 
 .tip-card {
-  background: rgba(246, 207, 98, 0.26);
-  border: 1px solid rgba(246, 207, 98, 0.48);
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(246, 207, 98, 0.24);
 }
 
 .button-row {
