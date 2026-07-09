@@ -1,6 +1,6 @@
 :root {
-  --cream: #fbf4df;
-  --cream-2: #fffaf0;
+--cream: #fbf0d8;
+--cream-2: #fbf0d8;
   --green: #173f35;
   --green-2: #2f6b54;
   --pink: #e86f91;
@@ -19,13 +19,9 @@ body {
   margin: 0;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--ink);
-  background:
-    radial-gradient(circle at 12% 10%, rgba(232,111,145,0.05), transparent 16rem),
-    radial-gradient(circle at 92% 8%, rgba(246,207,98,0.05), transparent 14rem),
-    radial-gradient(circle at 90% 92%, rgba(47,107,84,0.03), transparent 18rem),
-    linear-gradient(180deg, #fffefc 0%, #fffdf9 100%);
+  background: var(--cream);
   min-height: 100vh;
-position: relative;
+  position: relative;
 }
 
 button, input, textarea, select {
@@ -58,8 +54,8 @@ button, input, textarea, select {
 .decor-piano {
   right: 20px;
   bottom: 20px;
-  width: 170px;
-  height: 170px;
+  width: 360px;
+  height: 220px;
   background-image: url("/public/images/PIANO.png");
 }
 .top-nav {
