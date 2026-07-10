@@ -14,65 +14,75 @@
 }
 
 * { box-sizing: border-box; }
-
 body {
   margin: 0;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--ink);
-  background: #fff8e8;
+  background:
+    radial-gradient(circle at 50% 16%, rgba(255,255,255,0.92) 0 260px, rgba(255,255,255,0.35) 520px, transparent 820px),
+    radial-gradient(circle at 50% 58%, rgba(255,255,255,0.62) 0 360px, transparent 760px),
+    linear-gradient(180deg, #fffdf8 0%, #fff8ec 48%, #fffaf2 100%);
   background-attachment: fixed;
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
 }
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: url("/public/images/NOTES AND LEAVES.png");
+  background-repeat: repeat;
+  background-size: 330px auto;
+  background-position: 24px 18px;
+  opacity: 0.22;
+}
+
 button, input, textarea, select {
   font: inherit;
 }
+
 .decor-art {
   position: fixed;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
 }
 
 .decor-sax {
-  left: -42px;
-  bottom: -26px;
-  width: 310px;
-  height: 310px;
+  left: -18px;
+  bottom: -20px;
+  width: 300px;
+  height: 300px;
   background-image: url("/public/images/SAX.png");
-  opacity: 0.90;
+  opacity: 0.94;
 }
 
 .decor-record {
-  right: 34px;
-  top: 92px;
-  width: 270px;
-  height: 270px;
+  right: 48px;
+  top: 96px;
+  width: 290px;
+  height: 290px;
   background-image: url("/public/images/DONT LET ME DOWN.png");
-  opacity: 0.95;
+  opacity: 0.96;
 }
 
 .decor-piano {
-  right: -18px;
-  bottom: 22px;
-  width: 360px;
-  height: 230px;
+  right: 18px;
+  bottom: 28px;
+  width: 345px;
+  height: 225px;
   background-image: url("/public/images/PIANO.png");
-  opacity: 0.92;
+  opacity: 0.94;
 }
 
 .decor-notes {
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  background-image: url("/public/images/NOTES AND LEAVES.png");
-  background-repeat: repeat;
-  background-size: 260px auto;
-  background-position: 40px 40px;
-  opacity: 0.18;
+  display: none;
 }
 .top-nav {
   max-width: 1180px;
@@ -444,36 +454,29 @@ textarea {
   }
 
   .decor-sax {
-    left: -95px;
-    bottom: -70px;
-    width: 240px;
-    height: 240px;
+    left: -82px;
+    bottom: -64px;
+    width: 230px;
+    height: 230px;
   }
 
   .decor-record {
-    right: -70px;
-    top: 90px;
-    width: 210px;
-    height: 210px;
+    right: -58px;
+    top: 96px;
+    width: 200px;
+    height: 200px;
   }
 
   .decor-piano {
-    right: -120px;
-    bottom: 30px;
-    width: 260px;
-    height: 180px;
+    right: -86px;
+    bottom: 22px;
+    width: 245px;
+    height: 165px;
   }
 
-.decor-notes {
-  display: block;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
-  background-repeat: repeat;
-  background-size: 190px auto;
-  background-position: 16px 24px;
-  opacity: 0.14;
-}
+  .decor-notes {
+    display: none;
+  }
 }
 /* Reveal Confirmation Dialog */
 
