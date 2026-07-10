@@ -1,6 +1,6 @@
 :root {
---cream: #fbf0d8;
---cream-2: #fbf0d8;
+  --cream: #fff8e8;
+  --cream-2: #fffdf7;
   --green: #173f35;
   --green-2: #2f6b54;
   --pink: #e86f91;
@@ -8,8 +8,8 @@
   --ink: #1d2722;
   --muted: #66736c;
   --line: #eadfca;
-  --card: rgba(255,255,255,0.72);
-  --shadow: 0 18px 40px rgba(23, 63, 53, 0.11);
+  --card: rgba(255,255,255,0.78);
+  --shadow: 0 18px 40px rgba(23, 63, 53, 0.10);
   --radius: 26px;
 }
 
@@ -19,11 +19,16 @@ body {
   margin: 0;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--ink);
-  background: var(--cream);
+  background:
+    radial-gradient(circle at 6% 18%, rgba(246,207,98,0.22) 0 180px, transparent 320px),
+    radial-gradient(circle at 92% 12%, rgba(232,111,145,0.16) 0 170px, transparent 330px),
+    radial-gradient(circle at 88% 88%, rgba(47,107,84,0.13) 0 220px, transparent 420px),
+    linear-gradient(180deg, #fffaf0 0%, #fbf0d8 52%, #fff8e8 100%);
+  background-attachment: fixed;
   min-height: 100vh;
   position: relative;
+  overflow-x: hidden;
 }
-
 button, input, textarea, select {
   font: inherit;
 }
@@ -33,30 +38,40 @@ button, input, textarea, select {
   z-index: 0;
   background-repeat: no-repeat;
   background-size: contain;
+  background-position: center;
+  opacity: 0.96;
 }
 
 .decor-sax {
-  left: -10px;
-  bottom: 20px;
-  width: 340px;
-  height: 340px;
+  left: -54px;
+  bottom: -34px;
+  width: 330px;
+  height: 330px;
   background-image: url("/public/images/SAX.png");
 }
 
 .decor-record {
-  right: -15px;
-  top: 20px;
-  width: 240px;
-  height: 240px;
+  right: 22px;
+  top: 82px;
+  width: 285px;
+  height: 285px;
   background-image: url("/public/images/DONT LET ME DOWN.png");
 }
 
 .decor-piano {
-  right: 20px;
-  bottom: 20px;
-  width: 360px;
-  height: 220px;
+  right: -38px;
+  bottom: 12px;
+  width: 390px;
+  height: 245px;
   background-image: url("/public/images/PIANO.png");
+}
+
+.decor-notes {
+  left: 42px;
+  top: 135px;
+  width: 220px;
+  height: 220px;
+  background-image: url("/public/images/NOTES AND LEAVES.png");
 }
 .top-nav {
   max-width: 1180px;
@@ -425,6 +440,31 @@ textarea {
 
   .app-shell {
     padding-inline: 16px;
+  }
+
+  .decor-sax {
+    left: -95px;
+    bottom: -70px;
+    width: 240px;
+    height: 240px;
+  }
+
+  .decor-record {
+    right: -70px;
+    top: 90px;
+    width: 210px;
+    height: 210px;
+  }
+
+  .decor-piano {
+    right: -120px;
+    bottom: 30px;
+    width: 260px;
+    height: 180px;
+  }
+
+  .decor-notes {
+    display: none;
   }
 }
 /* Reveal Confirmation Dialog */
