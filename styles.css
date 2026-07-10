@@ -19,11 +19,7 @@ body {
   margin: 0;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--ink);
-  background:
-    radial-gradient(circle at 6% 18%, rgba(246,207,98,0.22) 0 180px, transparent 320px),
-    radial-gradient(circle at 92% 12%, rgba(232,111,145,0.16) 0 170px, transparent 330px),
-    radial-gradient(circle at 88% 88%, rgba(47,107,84,0.13) 0 220px, transparent 420px),
-    linear-gradient(180deg, #fffaf0 0%, #fbf0d8 52%, #fff8e8 100%);
+  background: #fff8e8;
   background-attachment: fixed;
   min-height: 100vh;
   position: relative;
@@ -37,41 +33,46 @@ button, input, textarea, select {
   pointer-events: none;
   z-index: 0;
   background-repeat: no-repeat;
-  background-size: contain;
   background-position: center;
-  opacity: 0.96;
+  background-size: contain;
 }
 
 .decor-sax {
-  left: -54px;
-  bottom: -34px;
-  width: 330px;
-  height: 330px;
+  left: -42px;
+  bottom: -26px;
+  width: 310px;
+  height: 310px;
   background-image: url("/public/images/SAX.png");
+  opacity: 0.90;
 }
 
 .decor-record {
-  right: 22px;
-  top: 82px;
-  width: 285px;
-  height: 285px;
+  right: 34px;
+  top: 92px;
+  width: 270px;
+  height: 270px;
   background-image: url("/public/images/DONT LET ME DOWN.png");
+  opacity: 0.95;
 }
 
 .decor-piano {
-  right: -38px;
-  bottom: 12px;
-  width: 390px;
-  height: 245px;
+  right: -18px;
+  bottom: 22px;
+  width: 360px;
+  height: 230px;
   background-image: url("/public/images/PIANO.png");
+  opacity: 0.92;
 }
 
 .decor-notes {
-  left: 42px;
-  top: 135px;
-  width: 220px;
-  height: 220px;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
   background-image: url("/public/images/NOTES AND LEAVES.png");
+  background-repeat: repeat;
+  background-size: 260px auto;
+  background-position: 40px 40px;
+  opacity: 0.18;
 }
 .top-nav {
   max-width: 1180px;
@@ -463,9 +464,16 @@ textarea {
     height: 180px;
   }
 
-  .decor-notes {
-    display: none;
-  }
+.decor-notes {
+  display: block;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-repeat: repeat;
+  background-size: 190px auto;
+  background-position: 16px 24px;
+  opacity: 0.14;
+}
 }
 /* Reveal Confirmation Dialog */
 
