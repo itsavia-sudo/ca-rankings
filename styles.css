@@ -41,30 +41,39 @@ body::before {
     url("/public/images/LEAVE FLOWER.png"),
     url("/public/images/LEAVE LEFT.png"),
     url("/public/images/LEAVE RIGHT.png");
+  ,
+url("/public/images/LEAVE FLOWER.png"),
+url("/public/images/LEAVE LEFT.png")
 
   background-repeat:
-    no-repeat,
-    no-repeat,
-    no-repeat,
-    no-repeat,
-    no-repeat,
-    no-repeat;
+no-repeat,
+no-repeat,
+no-repeat,
+no-repeat,
+no-repeat,
+no-repeat,
+no-repeat,
+no-repeat;
 
   background-size:
-    185px auto,
-    150px auto,
-    145px auto,
-    150px auto,
-    125px auto,
-    120px auto;
+185px auto,
+150px auto,
+145px auto,
+150px auto,
+125px auto,
+120px auto,
+135px auto,
+120px auto;
 
-  background-position:
-    2% 20%,
-    31% 9%,
-    64% 11%,
-    98% 67%,
-    8% 92%,
-    89% 42%;
+background-position:
+2% 20%,
+31% 9%,
+64% 11%,
+98% 67%,
+8% 92%,
+89% 42%,
+18% 72%,
+73% 90%;
 
   opacity: 0.72;
 }
@@ -103,14 +112,14 @@ body::after {
     52px auto,
     210px auto;
 
-  background-position:
-    40% 18%,
-    76% 8%,
-    96% 18%,
-    14% 58%,
-    74% 78%,
-    18% 83%,
-    101% 91%;
+background-position:
+  48% 26%,
+  82% 7%,
+  93% 30%,
+  13% 56%,
+  76% 79%,
+  10% 84%,
+  106% 92%;
 
   opacity: 0.86;
 }
@@ -147,10 +156,10 @@ button, input, textarea, select {
 }
 
 .decor-piano {
-  right: -15px;
-  bottom: -10px;
-  width: 430px;
-  height: 280px;
+  right: -20px;
+  bottom: -15px;
+  width: 510px;
+  height: 335px;
   background-image: url("/public/images/PIANO.png");
   opacity: 0.96;
 }
