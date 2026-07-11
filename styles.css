@@ -33,19 +33,33 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: 1;
-  background-image:
-    url("/public/images/NOTES AND LEAVES.png"),
-    url("/public/images/NOTES AND LEAVES.png"),
-    url("/public/images/NOTES AND LEAVES.png");
-  background-repeat: no-repeat;
+background-image:
+  url("/public/images/NOTES AND LEAVES.png"),
+  url("/public/images/NOTES AND LEAVES.png"),
+  url("/public/images/NOTES AND LEAVES.png"),
+  url("/public/images/NOTES AND LEAVES.png"),
+  url("/public/images/NOTES AND LEAVES.png");
+
+background-repeat:
+  no-repeat,
+  no-repeat,
+  no-repeat,
+  no-repeat,
+  no-repeat;
+
 background-size:
   390px auto,
   330px auto,
-  370px auto;
+  280px auto,
+  250px auto,
+  220px auto;
+
 background-position:
   2% 16%,
-  96% 43%,
-  17% 79%;
+  96% 42%,
+  14% 76%,
+  74% 72%,
+  46% 88%;
 opacity: 0.58;
 }
 
