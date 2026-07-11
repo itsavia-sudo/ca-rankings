@@ -705,7 +705,11 @@ function handleTieBreakDragOver(event) {
   event.preventDefault();
 
   const targetItem = event.currentTarget;
+document
+  .querySelectorAll(".tie-break-item.drag-over")
+  .forEach(item => item.classList.remove("drag-over"));
 
+targetItem.classList.add("drag-over");
   if (
     !draggedTieBreakItem ||
     draggedTieBreakItem === targetItem
@@ -741,6 +745,11 @@ function updateTieBreakPositions(list) {
 
 function handleTieBreakDragEnd(event) {
   event.currentTarget.classList.remove("dragging");
+
+  document
+    .querySelectorAll(".tie-break-item.drag-over")
+    .forEach(item => item.classList.remove("drag-over"));
+
   draggedTieBreakItem = null;
 }
 
