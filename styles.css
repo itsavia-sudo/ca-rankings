@@ -162,10 +162,10 @@ button, input, textarea, select {
 }
 
 .decor-sax {
-  left: -105px;
-  bottom: -65px;
-  width: 470px;
-  height: 470px;
+  left: -55px;
+bottom: -65px;
+transform: rotate(-14deg);
+transform-origin: bottom left;
   background-image: url("/public/images/SAX.png");
   opacity: 0.96;
   transform: rotate(-7deg);
