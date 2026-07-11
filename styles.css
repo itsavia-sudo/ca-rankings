@@ -48,19 +48,19 @@ background-repeat:
   no-repeat;
 
 background-size:
+  470px auto,
   390px auto,
-  330px auto,
-  280px auto,
-  250px auto,
-  220px auto;
+  340px auto,
+  320px auto,
+  300px auto;
 
 background-position:
-  2% 16%,
-  96% 42%,
-  14% 76%,
-  74% 72%,
-  46% 88%;
-opacity: 0.58;
+  -4% 12%,
+  101% 40%,
+  10% 68%,
+  78% 73%,
+  50% 92%;
+opacity: 0.78;
 }
 
 button, input, textarea, select {
