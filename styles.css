@@ -38,15 +38,15 @@ body::before {
     url("/public/images/NOTES AND LEAVES.png"),
     url("/public/images/NOTES AND LEAVES.png");
   background-repeat: no-repeat;
-  background-size:
-    220px auto,
-    180px auto,
-    200px auto;
-  background-position:
-    3% 18%,
-    94% 42%,
-    18% 82%;
-  opacity: 0.28;
+background-size:
+  390px auto,
+  330px auto,
+  370px auto;
+background-position:
+  2% 16%,
+  96% 43%,
+  17% 79%;
+opacity: 0.58;
 }
 
 button, input, textarea, select {
