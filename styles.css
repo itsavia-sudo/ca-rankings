@@ -446,6 +446,26 @@ textarea {
   z-index: 5;
 }
 
+.tie-break-item {
+  position: relative;
+}
+
+.tie-break-item.drag-over {
+  border-color: var(--pink);
+  background: rgba(232, 111, 145, 0.08);
+}
+
+.tie-break-item.drag-over::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  top: -6px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--pink);
+}
+
 .tie-break-position {
   width: 42px;
   height: 42px;
