@@ -59,12 +59,12 @@ body::before {
     120px auto;
 
   background-position:
-    2% 20%,
-    31% 9%,
-    64% 11%,
-    98% 67%,
-    8% 92%,
-    89% 42%;
+    1% 19%,
+    7% 86%,
+    96% 69%,
+    99% 35%,
+    13% 66%,
+    84% 16%;
 
   opacity: 0.72;
 }
@@ -83,7 +83,7 @@ body::after {
     url("/public/images/PINK AND YELLOW NOTES.png"),
     url("/public/images/Horizontal notes.png"),
     url("/public/images/KEY.png"),
-    url("/public/images/NOTES AND LEAVES.png");
+    url("/public/images/KEY.png");
 
   background-repeat:
     no-repeat,
@@ -101,16 +101,16 @@ body::after {
     110px auto,
     190px auto,
     52px auto,
-    210px auto;
+    68px auto;
 
 background-position:
-  48% 26%,
-  82% 7%,
-  93% 30%,
-  13% 56%,
-  76% 79%,
-  10% 84%,
-  106% 92%;
+    43% 91%,
+    79% 7%,
+    17% 16%,
+    12% 55%,
+    76% 82%,
+    16% 73%,
+    86% 58%;
 
   opacity: 0.86;
 }
@@ -147,10 +147,10 @@ button, input, textarea, select {
 }
 
 .decor-piano {
-  right: -20px;
-  bottom: -15px;
-  width: 510px;
-  height: 335px;
+  right: -35px;
+  bottom: -35px;
+  width: 540px;
+  height: 350px;
   background-image: url("/public/images/PIANO.png");
   opacity: 0.96;
 }
@@ -542,10 +542,10 @@ textarea {
 }
 
 .decor-piano {
-  right: -60px;
-  bottom: 10px;
-  width: 300px;
-  height: 200px;
+  right: -55px;
+  bottom: -25px;
+  width: 330px;
+  height: 220px;
 }
 
   .decor-notes {
