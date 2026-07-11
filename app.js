@@ -317,7 +317,7 @@ function renderCollection() {
   const revealed = state.rankings.filter(r => r.status === "revealed");
   renderShell("Ranking Collection", "Your quiet vinyl shelf of completed rankings.", `
     <section class="card">
-      ${revealed.length ? `<div class="list">${revealed.map(r => `
+      ${revealed.length ? `<div class="record-shelf">${revealed.map(r => `
         <article class="row">
           <div class="button-row" style="justify-content:space-between">
             <strong>${escapeHtml(r.name)}</strong>
