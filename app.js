@@ -318,14 +318,25 @@ function renderCollection() {
   renderShell("Ranking Collection", "Your quiet vinyl shelf of completed rankings.", `
     <section class="card">
       ${revealed.length ? `<div class="record-shelf">${revealed.map(r => `
-        <article class="row">
-          <div class="button-row" style="justify-content:space-between">
-            <strong>${escapeHtml(r.name)}</strong>
-            ${statusBadge(r.status)}
-          </div>
-         <div class="song-meta">${r.type === "artist" ? "Artist Ranking" : "Mixed Playlist"} · ${new Date(r.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}</div>
-          <button class="btn secondary" onclick="go('/${state.role}/results/${r.id}')">View Results</button>
-        </article>
+     <article class="record-spine" onclick="go('/${state.role}/results/${r.id}')">
+  <div class="record-spine-title">
+    ${escapeHtml(r.name)}
+  </div>
+
+  <div class="record-spine-meta">
+    ${r.type === "artist" ? "Artist" : "Mixed"}
+  </div>
+
+  <div class="record-spine-date">
+    ${new Date(r.created_at).toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "short",
+      year: "numeric"
+    })}
+  </div>
+
+  ${statusBadge(r.status)}
+</article>
       `).join("")}</div>` : `
         <h2>Your collection is waiting for its first record.</h2>
         <p class="helper">Revealed rankings will appear here.</p>
