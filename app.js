@@ -19,7 +19,9 @@ let state = {
   rankings: [],
   songs: [],
   ratings: [],
-  progress: []
+  progress: [],
+  tieBreaks: [],
+  tieBreakEntries: []
 };
 
 function initSupabase() {
@@ -117,19 +119,59 @@ function renderMissingConfig() {
 
 async function loadAll() {
   if (!supabaseClient) return;
-  const [rankings, songs, ratings, progress] = await Promise.all([
-    supabaseClient.from("rankings").select("*").order("created_at", { ascending: false }),
-    supabaseClient.from("songs").select("*").order("import_order", { ascending: true }),
-    supabaseClient.from("ratings").select("*"),
-    supabaseClient.from("progress").select("*")
+
+  const [
+    rankings,
+    songs,
+    ratings,
+    progress,
+    tieBreaks,
+    tieBreakEntries
+  ] = await Promise.all([
+    supabaseClient
+      .from("rankings")
+      .select("*")
+      .order("created_at", { ascending: false }),
+
+    supabaseClient
+      .from("songs")
+      .select("*")
+      .order("import_order", { ascending: true }),
+
+    supabaseClient
+      .from("ratings")
+      .select("*"),
+
+    supabaseClient
+      .from("progress")
+      .select("*"),
+
+    supabaseClient
+      .from("tie_breaks")
+      .select("*"),
+
+    supabaseClient
+      .from("tie_break_entries")
+      .select("*")
   ]);
-  for (const res of [rankings, songs, ratings, progress]) {
+
+  for (const res of [
+    rankings,
+    songs,
+    ratings,
+    progress,
+    tieBreaks,
+    tieBreakEntries
+  ]) {
     if (res.error) throw res.error;
   }
+
   state.rankings = rankings.data || [];
   state.songs = songs.data || [];
   state.ratings = ratings.data || [];
   state.progress = progress.data || [];
+  state.tieBreaks = tieBreaks.data || [];
+  state.tieBreakEntries = tieBreakEntries.data || [];
 }
 
 function songsFor(rankingId) {
