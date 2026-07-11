@@ -26,7 +26,6 @@ body {
   position: relative;
   overflow-x: hidden;
 }
-
 body::before {
   content: "";
   position: fixed;
@@ -40,9 +39,6 @@ body::before {
     url("/public/images/LEAVE RIGHT.png"),
     url("/public/images/LEAVE FLOWER.png"),
     url("/public/images/LEAVE LEFT.png"),
-    url("/public/images/LEAVE RIGHT.png"),
-    url("/public/images/LEAVE FLOWER.png"),
-    url("/public/images/LEAVE LEFT.png"),
     url("/public/images/LEAVE RIGHT.png");
 
   background-repeat:
@@ -51,34 +47,25 @@ body::before {
     no-repeat,
     no-repeat,
     no-repeat,
-    no-repeat,
-    no-repeat,
-    no-repeat,
     no-repeat;
 
   background-size:
-    185px auto,
-    150px auto,
-    145px auto,
-    150px auto,
+    175px auto,
     125px auto,
-    120px auto,
     105px auto,
-    100px auto,
-    95px auto;
+    145px auto,
+    110px auto,
+    115px auto;
 
   background-position:
-    1% 19%,
-    7% 86%,
-    96% 69%,
+    1% 20%,
+    5% 76%,
+    17% 88%,
     99% 35%,
-    13% 66%,
-    84% 16%,
-    4% 72%,
-    88% 84%,
-    95% 55%;
+    91% 69%,
+    82% 88%;
 
-  opacity: 0.74;
+  opacity: 0.72;
 }
 
 body::after {
@@ -90,22 +77,20 @@ body::after {
 
   background-image:
     url("/public/images/Horizontal notes.png"),
+
     url("/public/images/PINK AND YELLOW NOTES.png"),
-    url("/public/images/KEY.png"),
     url("/public/images/PINK AND YELLOW NOTES.png"),
-    url("/public/images/Horizontal notes.png"),
-    url("/public/images/KEY.png"),
-    url("/public/images/KEY.png"),
-    url("/public/images/KEY.png"),
-    url("/public/images/Horizontal notes.png"),
     url("/public/images/PINK AND YELLOW NOTES.png"),
+    url("/public/images/PINK AND YELLOW NOTES.png"),
+
     url("/public/images/KEY.png"),
     url("/public/images/KEY.png"),
-    url("/public/images/PINK AND YELLOW NOTES.png");
+    url("/public/images/KEY.png"),
+    url("/public/images/KEY.png"),
+    url("/public/images/KEY.png"),
+    url("/public/images/KEY.png");
 
   background-repeat:
-    no-repeat,
-    no-repeat,
     no-repeat,
     no-repeat,
     no-repeat,
@@ -120,35 +105,35 @@ body::after {
 
   background-size:
     245px auto,
-    135px auto,
-    68px auto,
-    110px auto,
-    175px auto,
-    52px auto,
-    68px auto,
-    48px auto,
-    145px auto,
+
+    105px auto,
+    92px auto,
+    115px auto,
     88px auto,
-    55px auto,
-    45px auto,
-    78px auto;
+
+    58px auto,
+    48px auto,
+    62px auto,
+    44px auto,
+    54px auto,
+    46px auto;
 
   background-position:
     65% 14%,
-    79% 7%,
-    17% 16%,
-    12% 55%,
-    78% 81%,
-    16% 73%,
-    86% 58%,
-    92% 45%,
-    10% 76%,
-    8% 69%,
-    84% 70%,
-    5% 43%,
-    89% 88%;
 
-  opacity: 0.88;
+    7% 13%,
+    17% 83%,
+    79% 84%,
+    94% 53%,
+
+    16% 31%,
+    5% 56%,
+    29% 92%,
+    88% 22%,
+    95% 67%,
+    67% 91%;
+
+  opacity: 0.86;
 }
 
 button, input, textarea, select {
@@ -184,7 +169,7 @@ button, input, textarea, select {
 
 .decor-piano {
   right: -35px;
-  bottom: -35px;
+  bottom: -75px;
   width: 540px;
   height: 350px;
   background-image: url("/public/images/PIANO.png");
@@ -579,7 +564,7 @@ textarea {
 
 .decor-piano {
   right: -55px;
-  bottom: -25px;
+  bottom: -55px;
   width: 330px;
   height: 220px;
 }
@@ -587,64 +572,58 @@ textarea {
   .decor-notes {
     display: none;
   }
-    body::before {
+   body::before {
     background-size:
-       120px auto,
-      95px auto,
-      90px auto,
-      105px auto,
-      80px auto,
-      75px auto,
+      115px auto,
+      82px auto,
       72px auto,
-      68px auto,
-      65px auto;
+      95px auto,
+      76px auto,
+      78px auto;
 
     background-position:
-        -7% 25%,
-      22% 10%,
-      88% 15%,
-      106% 66%,
-      4% 88%,
-      92% 43%,
-      5% 70%,
-      88% 84%,
-      100% 55%;
+      -6% 25%,
+      2% 78%,
+      18% 91%,
+      106% 37%,
+      94% 70%,
+      78% 90%;
 
-    opacity: 0.62;
+    opacity: 0.60;
   }
 
   body::after {
     background-size:
-        145px auto,
-      90px auto,
-      46px auto,
-      80px auto,
-      115px auto,
-      40px auto,
-      48px auto,
-      34px auto,
-      105px auto,
+      145px auto,
+
+      70px auto,
+      62px auto,
+      76px auto,
       60px auto,
-      38px auto,
-      32px auto,
-      55px auto;
+
+      40px auto,
+      34px auto,
+      42px auto,
+      31px auto,
+      37px auto,
+      32px auto;
 
     background-position:
-      52% 20%,
-      90% 10%,
-      96% 31%,
-      2% 57%,
-      76% 80%,
-      13% 74%,
-      92% 56%,
-      5% 43%,
-      10% 78%,
-      5% 68%,
-      82% 70%,
-      88% 42%,
-      90% 89%;
+      58% 20%,
 
-    opacity: 0.76;
+      4% 15%,
+      15% 81%,
+      76% 83%,
+      96% 55%,
+
+      12% 33%,
+      3% 58%,
+      30% 93%,
+      90% 27%,
+      96% 68%,
+      65% 92%;
+
+    opacity: 0.74;
   }
 }
 /* Reveal Confirmation Dialog */
