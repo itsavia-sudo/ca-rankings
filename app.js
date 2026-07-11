@@ -1140,8 +1140,35 @@ function calculateResults(rankingId) {
     const avia = state.ratings.find(r => r.song_id === song.id && r.participant === "avia")?.score ?? null;
     const chen = state.ratings.find(r => r.song_id === song.id && r.participant === "chen")?.score ?? null;
     const average = avia && chen ? (avia + chen) / 2 : null;
-    return { ...song, avia, chen, average };
-  }).filter(x => x.average !== null).sort((a,b) => a.average - b.average || a.import_order - b.import_order);
+    const tieBreakEntry = state.tieBreakEntries.find(
+  entry =>
+    entry.song_id === song.id &&
+    entry.participant === "avia"
+);
+
+return {
+  ...song,
+  avia,
+  chen,
+  average,
+  tieBreakOrder: tieBreakEntry?.tie_break_order ?? null
+};
+ })
+.filter(x => x.average !== null)
+.sort((a, b) => {
+  if (a.average !== b.average) {
+    return a.average - b.average;
+  }
+
+  if (
+    a.tieBreakOrder !== null &&
+    b.tieBreakOrder !== null
+  ) {
+    return b.tieBreakOrder - a.tieBreakOrder;
+  }
+
+  return a.import_order - b.import_order;
+});
 }
 
 function renderResults() {
@@ -1162,8 +1189,12 @@ function renderResults() {
               ${s.spotify_url ? `<a class="song-title" href="${escapeHtml(s.spotify_url)}" target="_blank" rel="noopener">${rows.length - i}. ${escapeHtml(s.title)}</a>` : `<span class="song-title">${rows.length - i}. ${escapeHtml(s.title)}</span>`}
               <div class="song-meta">${escapeHtml(s.artist || "")}</div>
             </div>
-            <strong>${s.average.toFixed(2)}</strong>
-          </article>
+<div>
+  <strong>${s.average.toFixed(2)}</strong>
+  ${s.tieBreakOrder !== null
+    ? `<div class="song-meta">Resolved by Tie Break</div>`
+    : ""}
+</div>          </article>
         `).join("")}
       </div>
     </section>
