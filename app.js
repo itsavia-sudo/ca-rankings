@@ -195,11 +195,46 @@ function isParticipantFinished(rankingId, participant) {
   return !!progressFor(rankingId, participant)?.finished;
 }
 
+function getPendingTieBreak(rankingId, participant) {
+  const unresolvedTieBreaks = state.tieBreaks.filter(
+    tieBreak =>
+      tieBreak.ranking_id === rankingId &&
+      !tieBreak.resolved
+  );
+
+  for (const tieBreak of unresolvedTieBreaks) {
+    const entries = state.tieBreakEntries.filter(
+      entry =>
+        entry.tie_break_id === tieBreak.id &&
+        entry.participant === participant
+    );
+
+    const completed = entries.every(
+      entry => entry.tie_break_order !== null
+    );
+
+    if (!completed) {
+      return tieBreak;
+    }
+  }
+
+  return null;
+}
+
 function getNeedAttentionRankings() {
   if (state.role === "avia") {
-    return state.rankings.filter(r => ["draft", "in_progress", "ready_to_reveal"].includes(r.status));
+    return state.rankings.filter(r =>
+      ["draft", "in_progress", "ready_to_reveal"].includes(r.status)
+    );
   }
-  return state.rankings.filter(r => r.status === "in_progress" && !isParticipantFinished(r.id, "chen"));
+
+  return state.rankings.filter(r =>
+    r.status === "in_progress" &&
+    (
+      !isParticipantFinished(r.id, "chen") ||
+      !!getPendingTieBreak(r.id, "chen")
+    )
+  );
 }
 
 function renderDashboard() {
@@ -233,10 +268,37 @@ function renderRankingCard(r) {
   if (state.role === "avia" && r.status === "draft") {
     action = `<button class="btn primary" onclick="go('/avia/review/${r.id}')">Review & Publish</button>`;
   } else if (r.status === "in_progress") {
-const actionLabel = state.role === "chen" && chenRated === 0 ? "Start Rating" : state.role === "avia" && aviaRated === count ? "Edit Scores" : "Continue Rating";
-action = `<button class="btn primary" onclick="go('/${target}/rate/${r.id}')">${actionLabel}</button>`;
-} else if (state.role === "avia" && r.status === "ready_to_reveal") {
-  action = `<button class="btn primary" onclick="go('/avia/reveal/${r.id}')">Reveal Results</button>`;  } else if (r.status === "revealed") {
+    const pendingTieBreak = getPendingTieBreak(r.id, state.role);
+
+    if (pendingTieBreak) {
+      action = `
+        <button
+          class="btn primary"
+          onclick="go('/${state.role}/tie-break/${r.id}')"
+        >
+          Resolve Tie Break
+        </button>
+      `;
+    } else {
+      const actionLabel =
+        state.role === "chen" && chenRated === 0
+          ? "Start Rating"
+          : state.role === "avia" && aviaRated === count
+            ? "Edit Scores"
+            : "Continue Rating";
+
+      action = `
+        <button
+          class="btn primary"
+          onclick="go('/${target}/rate/${r.id}')"
+        >
+          ${actionLabel}
+        </button>
+      `;
+    }
+  } else if (state.role === "avia" && r.status === "ready_to_reveal") {
+    action = `<button class="btn primary" onclick="go('/avia/reveal/${r.id}')">Reveal Results</button>`;
+  } else if (r.status === "revealed") {
     action = `<button class="btn secondary" onclick="go('/${state.role}/results/${r.id}')">View Results</button>`;
   }
   return `
