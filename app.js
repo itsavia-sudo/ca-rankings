@@ -631,6 +631,89 @@ async function saveRating(rankingId, songId, score, page) {
   renderRate();
 }
 
+async function createTieBreaksIfNeeded(rankingId) {
+  const existingTieBreaks = state.tieBreaks.filter(
+    tieBreak => tieBreak.ranking_id === rankingId
+  );
+
+  if (existingTieBreaks.length > 0) {
+    return existingTieBreaks.filter(tieBreak => !tieBreak.resolved).length;
+  }
+
+  const results = songsFor(rankingId).map(song => {
+    const aviaScore = state.ratings.find(
+      rating =>
+        rating.song_id === song.id &&
+        rating.participant === "avia"
+    )?.score;
+
+    const chenScore = state.ratings.find(
+      rating =>
+        rating.song_id === song.id &&
+        rating.participant === "chen"
+    )?.score;
+
+    return {
+      song,
+      average: (aviaScore + chenScore) / 2
+    };
+  });
+
+  const groupsByAverage = new Map();
+
+  results.forEach(result => {
+    const key = result.average.toFixed(2);
+
+    if (!groupsByAverage.has(key)) {
+      groupsByAverage.set(key, []);
+    }
+
+    groupsByAverage.get(key).push(result.song);
+  });
+
+  const tiedGroups = [...groupsByAverage.entries()].filter(
+    ([, songs]) => songs.length > 1
+  );
+
+  for (const [average, tiedSongs] of tiedGroups) {
+    const { data: tieBreak, error: tieBreakError } = await supabaseClient
+      .from("tie_breaks")
+      .insert({
+        ranking_id: rankingId,
+        original_average: Number(average),
+        resolved: false
+      })
+      .select()
+      .single();
+
+    if (tieBreakError) throw tieBreakError;
+
+    const entries = tiedSongs.flatMap(song => [
+      {
+        tie_break_id: tieBreak.id,
+        song_id: song.id,
+        participant: "avia",
+        tie_break_order: null
+      },
+      {
+        tie_break_id: tieBreak.id,
+        song_id: song.id,
+        participant: "chen",
+        tie_break_order: null
+      }
+    ]);
+
+    const { error: entriesError } = await supabaseClient
+      .from("tie_break_entries")
+      .insert(entries);
+
+    if (entriesError) throw entriesError;
+  }
+
+  await loadAll();
+  return tiedGroups.length;
+}
+
 async function finishRating(rankingId) {
   const list = songsFor(rankingId);
   if (ratingCount(rankingId, state.role) < list.length) return showToast("Please rate every song first.");
@@ -640,9 +723,26 @@ async function finishRating(rankingId) {
   else await supabaseClient.from("progress").insert(payload);
 
   await loadAll();
-  if (isParticipantFinished(rankingId, "avia") && isParticipantFinished(rankingId, "chen")) {
-    await supabaseClient.from("rankings").update({ status: "ready_to_reveal" }).eq("id", rankingId);
-    await loadAll();
+
+  if (
+    isParticipantFinished(rankingId, "avia") &&
+    isParticipantFinished(rankingId, "chen")
+  ) {
+    try {
+      const tieBreakCount = await createTieBreaksIfNeeded(rankingId);
+
+      if (tieBreakCount === 0) {
+        await supabaseClient
+          .from("rankings")
+          .update({ status: "ready_to_reveal" })
+          .eq("id", rankingId);
+
+        await loadAll();
+      }
+    } catch (error) {
+      showToast(error.message);
+      return;
+    }
   }
 go(`/${state.role}/ranking-complete`);
 }
