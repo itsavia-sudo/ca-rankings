@@ -693,6 +693,289 @@ async function saveRating(rankingId, songId, score, page) {
   renderRate();
 }
 
+let draggedTieBreakItem = null;
+
+function handleTieBreakDragStart(event) {
+  draggedTieBreakItem = event.currentTarget;
+  event.dataTransfer.effectAllowed = "move";
+  event.currentTarget.classList.add("dragging");
+}
+
+function handleTieBreakDragOver(event) {
+  event.preventDefault();
+
+  const targetItem = event.currentTarget;
+
+  if (
+    !draggedTieBreakItem ||
+    draggedTieBreakItem === targetItem
+  ) {
+    return;
+  }
+
+  const rectangle = targetItem.getBoundingClientRect();
+  const insertAfter =
+    event.clientY > rectangle.top + rectangle.height / 2;
+
+  const list = targetItem.parentElement;
+
+  list.insertBefore(
+    draggedTieBreakItem,
+    insertAfter ? targetItem.nextSibling : targetItem
+  );
+
+  updateTieBreakPositions(list);
+}
+
+function updateTieBreakPositions(list) {
+  const items = list.querySelectorAll(".tie-break-item");
+
+  items.forEach((item, index) => {
+    const position = item.querySelector(".tie-break-position");
+
+    if (position) {
+      position.textContent = index + 1;
+    }
+  });
+}
+
+function handleTieBreakDragEnd(event) {
+  event.currentTarget.classList.remove("dragging");
+  draggedTieBreakItem = null;
+}
+
+function renderTieBreak() {
+  const ranking = state.rankings.find(
+    item => item.id === state.params.id
+  );
+
+  if (!ranking) {
+    return renderDashboard();
+  }
+
+  const tieBreak = getPendingTieBreak(
+    ranking.id,
+    state.role
+  );
+
+  if (!tieBreak) {
+    return go(`/${state.role}/dashboard`);
+  }
+
+  const entries = state.tieBreakEntries
+    .filter(entry =>
+      entry.tie_break_id === tieBreak.id &&
+      entry.participant === state.role
+    )
+    .sort((a, b) => {
+      if (
+        a.tie_break_order !== null &&
+        b.tie_break_order !== null
+      ) {
+        return a.tie_break_order - b.tie_break_order;
+      }
+
+      const songA = state.songs.find(
+        song => song.id === a.song_id
+      );
+
+      const songB = state.songs.find(
+        song => song.id === b.song_id
+      );
+
+      return (
+        (songA?.import_order || 0) -
+        (songB?.import_order || 0)
+      );
+    });
+
+  const tiedSongs = entries
+    .map(entry =>
+      state.songs.find(song => song.id === entry.song_id)
+    )
+    .filter(Boolean);
+
+  renderShell(
+    "Tie Break",
+    `${ranking.name} · Drag the songs into your preferred order.`,
+    `
+      <section class="card">
+        <h2>Resolve this tie</h2>
+
+        <p class="helper">
+          Place your favourite song at the top and your least favourite
+          song at the bottom.
+        </p>
+
+        <div
+          id="tieBreakList"
+          class="list"
+          data-tie-break-id="${tieBreak.id}"
+        >
+          ${tiedSongs.map((song, index) => `
+            <article
+              class="row song-row tie-break-item"
+              draggable="true"
+              data-song-id="${song.id}"
+              ondragstart="handleTieBreakDragStart(event)"
+              ondragover="handleTieBreakDragOver(event)"
+              ondragend="handleTieBreakDragEnd(event)"
+            >
+              <div class="button-row">
+                <strong class="tie-break-position">
+                  ${index + 1}
+                </strong>
+
+                <div>
+                  ${
+                    song.spotify_url
+                      ? `
+                        <a
+                          class="song-title"
+                          href="${escapeHtml(song.spotify_url)}"
+                          target="_blank"
+                          rel="noopener"
+                        >
+                          ${escapeHtml(song.title)}
+                        </a>
+                      `
+                      : `
+                        <span class="song-title">
+                          ${escapeHtml(song.title)}
+                        </span>
+                      `
+                  }
+
+                  <div class="song-meta">
+                    ${escapeHtml(song.artist || "")}
+                  </div>
+                </div>
+              </div>
+
+              <span class="helper">Drag to reorder</span>
+            </article>
+          `).join("")}
+        </div>
+
+        <div class="button-row" style="margin-top:18px">
+          <button
+            class="btn primary"
+            onclick="saveTieBreakOrder('${ranking.id}', '${tieBreak.id}')"
+          >
+            Save Order
+          </button>
+
+          <button
+            class="btn secondary"
+            onclick="go('/${state.role}/dashboard')"
+          >
+            Back
+          </button>
+        </div>
+      </section>
+    `
+  );
+}
+
+async function saveTieBreakOrder(rankingId, tieBreakId) {
+  const list = document.getElementById("tieBreakList");
+
+  if (!list) {
+    return showToast("Tie Break list not found.");
+  }
+
+  const items = [...list.querySelectorAll(".tie-break-item")];
+
+  if (items.length < 2) {
+    return showToast("There are not enough songs to resolve this tie.");
+  }
+
+  const updates = items.map((item, index) => ({
+    songId: item.dataset.songId,
+    order: index + 1
+  }));
+
+  for (const update of updates) {
+    const { error } = await supabaseClient
+      .from("tie_break_entries")
+      .update({
+        tie_break_order: update.order
+      })
+      .eq("tie_break_id", tieBreakId)
+      .eq("song_id", update.songId)
+      .eq("participant", state.role);
+
+    if (error) {
+      showToast(error.message);
+      return;
+    }
+  }
+
+  await loadAll();
+
+  const tieBreakEntries = state.tieBreakEntries.filter(
+    entry => entry.tie_break_id === tieBreakId
+  );
+
+  const bothParticipantsFinished = tieBreakEntries.every(
+    entry => entry.tie_break_order !== null
+  );
+
+  if (bothParticipantsFinished) {
+    const { error: resolveError } = await supabaseClient
+      .from("tie_breaks")
+      .update({
+        resolved: true
+      })
+      .eq("id", tieBreakId);
+
+    if (resolveError) {
+      showToast(resolveError.message);
+      return;
+    }
+
+    await loadAll();
+  }
+
+  const rankingTieBreaks = state.tieBreaks.filter(
+    tieBreak => tieBreak.ranking_id === rankingId
+  );
+
+  const allTieBreaksResolved =
+    rankingTieBreaks.length > 0 &&
+    rankingTieBreaks.every(tieBreak => tieBreak.resolved);
+
+  if (allTieBreaksResolved) {
+    const { error: rankingError } = await supabaseClient
+      .from("rankings")
+      .update({
+        status: "ready_to_reveal"
+      })
+      .eq("id", rankingId);
+
+    if (rankingError) {
+      showToast(rankingError.message);
+      return;
+    }
+
+    await loadAll();
+  }
+
+  showToast("Tie Break order saved");
+
+  const nextTieBreak = getPendingTieBreak(
+    rankingId,
+    state.role
+  );
+
+  if (nextTieBreak) {
+    renderTieBreak();
+    return;
+  }
+
+  go(`/${state.role}/dashboard`);
+}
+
 async function createTieBreaksIfNeeded(rankingId) {
   const existingTieBreaks = state.tieBreaks.filter(
     tieBreak => tieBreak.ranking_id === rankingId
@@ -919,6 +1202,7 @@ async function router() {
   if (state.route === "create") return renderCreate();
   if (state.route === "review") return renderReview();
   if (state.route === "rate") return renderRate();
+  if (state.route === "tie-break") return renderTieBreak();
   if (state.route === "reveal") return renderReveal();
   if (state.route === "results") return renderResults();
   if (state.route === "ranking-complete") return renderRankingComplete();
