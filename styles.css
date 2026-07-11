@@ -85,6 +85,11 @@ body::after {
     url("/public/images/PINK AND YELLOW NOTES.png"),
     url("/public/images/PINK AND YELLOW NOTES.png"),
     url("/public/images/PINK AND YELLOW NOTES.png"),
+    url("/public/images/PINK AND YELLOW NOTES.png"),
+    url("/public/images/PINK AND YELLOW NOTES.png"),
+    url("/public/images/PINK AND YELLOW NOTES.png"),
+    url("/public/images/PINK AND YELLOW NOTES.png"),
+    url("/public/images/PINK AND YELLOW NOTES.png"),
 
     url("/public/images/KEY.png"),
     url("/public/images/KEY.png"),
@@ -93,21 +98,7 @@ body::after {
     url("/public/images/KEY.png"),
     url("/public/images/KEY.png");
 
-  background-repeat:
-    no-repeat,
-    no-repeat,
-    no-repeat,
-    no-repeat,
-    no-repeat,
-    no-repeat,
-    no-repeat,
-    no-repeat,
-    no-repeat,
-    no-repeat,
-    no-repeat,
-    no-repeat,
-    no-repeat,
-    no-repeat;
+  background-repeat: no-repeat;
 
   background-size:
     245px auto,
@@ -119,6 +110,11 @@ body::after {
     82px auto,
     74px auto,
     68px auto,
+    90px auto,
+    78px auto,
+    96px auto,
+    72px auto,
+    84px auto,
 
     58px auto,
     48px auto,
@@ -138,6 +134,12 @@ body::after {
     73% 61%,
     91% 30%,
 
+    24% 23%,
+    34% 74%,
+    57% 88%,
+    86% 43%,
+    84% 72%,
+
     16% 31%,
     5% 56%,
     29% 92%,
@@ -145,7 +147,7 @@ body::after {
     95% 67%,
     67% 91%;
 
-  opacity: 0.86;
+  opacity: 0.9;
 }
 
 button, input, textarea, select {
