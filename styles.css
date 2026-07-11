@@ -151,52 +151,6 @@ body::after {
   opacity: 0.88;
 }
 
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-
-  background-image:
-    url("/public/images/Horizontal notes.png"),
-    url("/public/images/PINK AND YELLOW NOTES.png"),
-    url("/public/images/KEY.png"),
-    url("/public/images/PINK AND YELLOW NOTES.png"),
-    url("/public/images/Horizontal notes.png"),
-    url("/public/images/KEY.png"),
-    url("/public/images/KEY.png");
-
-  background-repeat:
-    no-repeat,
-    no-repeat,
-    no-repeat,
-    no-repeat,
-    no-repeat,
-    no-repeat,
-    no-repeat;
-
-  background-size:
-    230px auto,
-    135px auto,
-    68px auto,
-    110px auto,
-    190px auto,
-    52px auto,
-    68px auto;
-
-background-position:
-    43% 91%,
-    79% 7%,
-    17% 16%,
-    12% 55%,
-    76% 82%,
-    16% 73%,
-    86% 58%;
-
-  opacity: 0.86;
-}
-
 button, input, textarea, select {
   font: inherit;
 }
