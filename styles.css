@@ -168,8 +168,8 @@ button, input, textarea, select {
   height: 470px;
   background-image: url("/public/images/SAX.png");
   opacity: 0.96;
-  transform: rotate(-5deg);
-  transform-origin: center bottom;
+transform: rotate(-12deg);
+transform-origin: 18% 100%;
 }
 
 .decor-record {
