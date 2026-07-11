@@ -82,6 +82,9 @@ body::after {
     url("/public/images/PINK AND YELLOW NOTES.png"),
     url("/public/images/PINK AND YELLOW NOTES.png"),
     url("/public/images/PINK AND YELLOW NOTES.png"),
+    url("/public/images/PINK AND YELLOW NOTES.png"),
+    url("/public/images/PINK AND YELLOW NOTES.png"),
+    url("/public/images/PINK AND YELLOW NOTES.png"),
 
     url("/public/images/KEY.png"),
     url("/public/images/KEY.png"),
@@ -101,6 +104,9 @@ body::after {
     no-repeat,
     no-repeat,
     no-repeat,
+    no-repeat,
+    no-repeat,
+    no-repeat,
     no-repeat;
 
   background-size:
@@ -110,6 +116,9 @@ body::after {
     92px auto,
     115px auto,
     88px auto,
+    82px auto,
+    74px auto,
+    68px auto,
 
     58px auto,
     48px auto,
@@ -125,6 +134,9 @@ body::after {
     17% 83%,
     79% 84%,
     94% 53%,
+    3% 39%,
+    73% 61%,
+    91% 30%,
 
     16% 31%,
     5% 56%,
@@ -150,12 +162,14 @@ button, input, textarea, select {
 }
 
 .decor-sax {
-  left: -35px;
-  bottom: -35px;
-  width: 360px;
-  height: 360px;
+  left: -105px;
+  bottom: -65px;
+  width: 470px;
+  height: 470px;
   background-image: url("/public/images/SAX.png");
   opacity: 0.96;
+  transform: rotate(-7deg);
+  transform-origin: bottom left;
 }
 
 .decor-record {
@@ -549,10 +563,12 @@ textarea {
   }
 
 .decor-sax {
-  left: -55px;
-  bottom: -35px;
-  width: 270px;
-  height: 270px;
+  left: -95px;
+  bottom: -55px;
+  width: 340px;
+  height: 340px;
+  transform: rotate(-7deg);
+  transform-origin: bottom left;
 }
 
 .decor-record {
@@ -600,6 +616,9 @@ textarea {
       62px auto,
       76px auto,
       60px auto,
+      56px auto,
+      50px auto,
+      46px auto,
 
       40px auto,
       34px auto,
@@ -615,6 +634,9 @@ textarea {
       15% 81%,
       76% 83%,
       96% 55%,
+      3% 39%,
+      72% 62%,
+      90% 31%,
 
       12% 33%,
       3% 58%,
