@@ -33,34 +33,86 @@ body::before {
   inset: 0;
   pointer-events: none;
   z-index: 1;
-background-image:
-  url("/public/images/NOTES AND LEAVES.png"),
-  url("/public/images/NOTES AND LEAVES.png"),
-  url("/public/images/NOTES AND LEAVES.png"),
-  url("/public/images/NOTES AND LEAVES.png"),
-  url("/public/images/NOTES AND LEAVES.png");
 
-background-repeat:
-  no-repeat,
-  no-repeat,
-  no-repeat,
-  no-repeat,
-  no-repeat;
+  background-image:
+    url("/public/images/LEAVE FLOWER.png"),
+    url("/public/images/LEAVE LEFT.png"),
+    url("/public/images/LEAVE RIGHT.png"),
+    url("/public/images/LEAVE FLOWER.png"),
+    url("/public/images/LEAVE LEFT.png"),
+    url("/public/images/LEAVE RIGHT.png");
 
-background-size:
-  470px auto,
-  390px auto,
-  340px auto,
-  320px auto,
-  300px auto;
+  background-repeat:
+    no-repeat,
+    no-repeat,
+    no-repeat,
+    no-repeat,
+    no-repeat,
+    no-repeat;
 
-background-position:
-  -4% 12%,
-  101% 40%,
-  10% 68%,
-  78% 73%,
-  50% 92%;
-opacity: 0.78;
+  background-size:
+    185px auto,
+    150px auto,
+    145px auto,
+    150px auto,
+    125px auto,
+    120px auto;
+
+  background-position:
+    2% 20%,
+    31% 9%,
+    64% 11%,
+    98% 67%,
+    8% 92%,
+    89% 42%;
+
+  opacity: 0.72;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+
+  background-image:
+    url("/public/images/Horizontal notes.png"),
+    url("/public/images/PINK AND YELLOW NOTES.png"),
+    url("/public/images/KEY.png"),
+    url("/public/images/PINK AND YELLOW NOTES.png"),
+    url("/public/images/Horizontal notes.png"),
+    url("/public/images/KEY.png"),
+    url("/public/images/NOTES AND LEAVES.png");
+
+  background-repeat:
+    no-repeat,
+    no-repeat,
+    no-repeat,
+    no-repeat,
+    no-repeat,
+    no-repeat,
+    no-repeat;
+
+  background-size:
+    230px auto,
+    135px auto,
+    68px auto,
+    110px auto,
+    190px auto,
+    52px auto,
+    210px auto;
+
+  background-position:
+    40% 18%,
+    76% 8%,
+    96% 18%,
+    14% 58%,
+    74% 78%,
+    18% 83%,
+    101% 91%;
+
+  opacity: 0.86;
 }
 
 button, input, textarea, select {
@@ -498,6 +550,47 @@ textarea {
 
   .decor-notes {
     display: none;
+  }
+    body::before {
+    background-size:
+      120px auto,
+      95px auto,
+      90px auto,
+      105px auto,
+      80px auto,
+      75px auto;
+
+    background-position:
+      -7% 25%,
+      22% 10%,
+      88% 15%,
+      106% 66%,
+      4% 88%,
+      92% 43%;
+
+    opacity: 0.58;
+  }
+
+  body::after {
+    background-size:
+      150px auto,
+      90px auto,
+      46px auto,
+      80px auto,
+      130px auto,
+      40px auto,
+      135px auto;
+
+    background-position:
+      42% 21%,
+      90% 10%,
+      96% 31%,
+      2% 57%,
+      74% 80%,
+      13% 74%,
+      110% 93%;
+
+    opacity: 0.72;
   }
 }
 /* Reveal Confirmation Dialog */
