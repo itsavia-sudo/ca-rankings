@@ -426,18 +426,20 @@ textarea {
 }
 .record-spine {
   position: relative;
-flex: 0 0 62px;
+flex: 0 0 42px;
   height: 270px;
-padding: 18px 6px;
+padding: 18px 3px;
   border: 1px solid rgba(23, 63, 53, 0.16);
-border-radius: 4px 4px 2px 2px;
+border-radius: 2px;
   background:
     linear-gradient(
       90deg,
-      rgba(255,255,255,0.28) 0 7px,
-      transparent 7px calc(100% - 7px),
-      rgba(23,63,53,0.08) calc(100% - 7px)
-    ),
+ linear-gradient(
+  90deg,
+  rgba(255,255,255,0.22) 0 2px,
+  transparent 2px calc(100% - 2px),
+  rgba(23,63,53,0.06) calc(100% - 2px)
+),
     linear-gradient(180deg, #f3c9d3 0%, #efb5c4 100%);
   box-shadow:
     4px 5px 12px rgba(23, 63, 53, 0.12),
