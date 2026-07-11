@@ -426,7 +426,11 @@ textarea {
 }
 .record-spine {
   position: relative;
-flex: 0 0 42px;
+flex: 0 0 34px;
+width: 34px;
+min-width: 34px;
+max-width: 34px;
+overflow: hidden;
   height: 270px;
 padding: 18px 3px;
   border: 1px solid rgba(23, 63, 53, 0.16);
@@ -508,11 +512,7 @@ border-radius: 2px;
 }
 
 .record-spine .status {
-  margin-top: 10px;
-  padding: 4px 7px;
-  font-size: 10px;
-  background: rgba(255,255,255,0.72);
-  color: var(--green);
+  display: none;
 }
 .row {
   background: rgba(255,255,255,0.58);
