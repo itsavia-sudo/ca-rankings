@@ -852,7 +852,7 @@ function renderTieBreak() {
                 </div>
               </div>
 
-              <span class="helper">Drag to reorder</span>
+              <span class="tie-break-handle">⋮⋮</span>
             </article>
           `).join("")}
         </div>
