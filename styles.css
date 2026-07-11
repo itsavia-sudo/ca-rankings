@@ -405,7 +405,25 @@ textarea {
   display: grid;
   gap: 12px;
 }
+.record-shelf {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 18px 12px 28px;
+  min-height: 340px;
+  border-bottom: 10px solid #b78d63;
+}
 
+.record-shelf::-webkit-scrollbar {
+  height: 10px;
+}
+
+.record-shelf::-webkit-scrollbar-thumb {
+  background: rgba(23,63,53,.18);
+  border-radius: 999px;
+}
 .row {
   background: rgba(255,255,255,0.58);
   border: 1px solid var(--line);
