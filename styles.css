@@ -408,7 +408,7 @@ textarea {
 .record-shelf {
   display: flex;
   align-items: flex-end;
-  gap: 14px;
+  gap: 3px;
   overflow-x: auto;
   overflow-y: hidden;
   padding: 18px 12px 28px;
@@ -426,11 +426,11 @@ textarea {
 }
 .record-spine {
   position: relative;
-  flex: 0 0 108px;
+flex: 0 0 62px;
   height: 270px;
-  padding: 18px 13px;
+padding: 18px 6px;
   border: 1px solid rgba(23, 63, 53, 0.16);
-  border-radius: 9px 9px 4px 4px;
+border-radius: 4px 4px 2px 2px;
   background:
     linear-gradient(
       90deg,
