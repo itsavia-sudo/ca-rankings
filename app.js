@@ -861,7 +861,7 @@ function renderTieBreak() {
                 </div>
               </div>
 
-              <span class="tie-break-handle">⋮⋮</span>
+             <span class="tie-break-handle">☰</span>
             </article>
           `).join("")}
         </div>
