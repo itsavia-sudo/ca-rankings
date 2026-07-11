@@ -41,39 +41,30 @@ body::before {
     url("/public/images/LEAVE FLOWER.png"),
     url("/public/images/LEAVE LEFT.png"),
     url("/public/images/LEAVE RIGHT.png");
-  ,
-url("/public/images/LEAVE FLOWER.png"),
-url("/public/images/LEAVE LEFT.png")
 
   background-repeat:
-no-repeat,
-no-repeat,
-no-repeat,
-no-repeat,
-no-repeat,
-no-repeat,
-no-repeat,
-no-repeat;
+    no-repeat,
+    no-repeat,
+    no-repeat,
+    no-repeat,
+    no-repeat,
+    no-repeat;
 
   background-size:
-185px auto,
-150px auto,
-145px auto,
-150px auto,
-125px auto,
-120px auto,
-135px auto,
-120px auto;
+    185px auto,
+    150px auto,
+    145px auto,
+    150px auto,
+    125px auto,
+    120px auto;
 
-background-position:
-2% 20%,
-31% 9%,
-64% 11%,
-98% 67%,
-8% 92%,
-89% 42%,
-18% 72%,
-73% 90%;
+  background-position:
+    2% 20%,
+    31% 9%,
+    64% 11%,
+    98% 67%,
+    8% 92%,
+    89% 42%;
 
   opacity: 0.72;
 }
