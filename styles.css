@@ -445,6 +445,65 @@ textarea {
   opacity: 0.95;
   z-index: 5;
 }
+
+.tie-break-position {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(232, 111, 145, 0.14);
+  color: var(--pink);
+  font-size: 17px;
+  font-weight: 900;
+  border: 1px solid rgba(232, 111, 145, 0.28);
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.tie-break-handle {
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: rgba(23, 63, 53, 0.07);
+  color: var(--green);
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: -5px;
+  cursor: grab;
+  user-select: none;
+  transition:
+    background-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.tie-break-item:hover {
+  border-color: rgba(47, 107, 84, 0.32);
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.tie-break-item:hover .tie-break-handle {
+  background: rgba(23, 63, 53, 0.13);
+  transform: scale(1.05);
+}
+
+.tie-break-item.dragging .tie-break-position {
+  background: var(--pink);
+  color: white;
+  transform: scale(1.08);
+}
+
+.tie-break-item.dragging .tie-break-handle {
+  cursor: grabbing;
+  background: rgba(23, 63, 53, 0.16);
+}
 .song-title {
   font-weight: 900;
   color: var(--green);
@@ -592,7 +651,40 @@ textarea {
   .song-row {
     grid-template-columns: 1fr;
   }
+.tie-break-item {
+  grid-template-columns: minmax(0, 1fr) 42px;
+  gap: 12px;
+  padding: 14px;
+}
 
+.tie-break-item .button-row {
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+
+.tie-break-item .button-row > div {
+  min-width: 0;
+}
+
+.tie-break-item .song-title {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tie-break-position {
+  width: 38px;
+  height: 38px;
+  flex-basis: 38px;
+}
+
+.tie-break-handle {
+  width: 38px;
+  height: 38px;
+  font-size: 20px;
+}
+  
   .app-shell {
     padding-inline: 16px;
   }
