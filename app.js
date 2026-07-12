@@ -615,7 +615,8 @@ const result = await supabaseClient
   .from("rankings")
   .delete()
   .eq("id", rankingId)
-  .eq("status", "draft");
+  .eq("status", "draft")
+.select();
 
 console.log(result);
 
