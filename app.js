@@ -611,12 +611,15 @@ if (songsError) {
   return;
 }
 
-  const { error: rankingError } = await supabaseClient
-    .from("rankings")
-    .delete()
-    .eq("id", rankingId)
-    .eq("status", "draft");
+const result = await supabaseClient
+  .from("rankings")
+  .delete()
+  .eq("id", rankingId)
+  .eq("status", "draft");
 
+console.log(result);
+
+const rankingError = result.error;
 if (rankingError) {
   console.error(rankingError);
   alert(rankingError.message);
