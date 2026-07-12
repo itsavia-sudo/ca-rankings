@@ -604,7 +604,12 @@ async function deleteDraftRanking(rankingId) {
     .from("songs")
     .delete()
     .eq("ranking_id", rankingId);
-
+  
+if (songsError) {
+  console.error(songsError);
+  alert(songsError.message);
+  return;
+}
 
   const { error: rankingError } = await supabaseClient
     .from("rankings")
