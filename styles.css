@@ -489,20 +489,19 @@ border-radius: 2px;
   writing-mode: vertical-rl;
   transform: rotate(180deg);
 
-  font-family: Inter, sans-serif;
-  font-size: 12px;
-  font-weight: 600;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
   line-height: 1;
+  letter-spacing: 0;
 
-  letter-spacing: -0.02em;
+  max-height: 145px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   order: 3;
   margin-top: auto;
-  margin-bottom: 8px;
-
-  max-height: 120px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  margin-bottom: 6px;
 }
 
 .record-spine {
