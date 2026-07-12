@@ -488,16 +488,21 @@ border-radius: 2px;
 .record-spine-title {
   writing-mode: vertical-rl;
   transform: rotate(180deg);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 15px;
+
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
   line-height: 1;
-  font-weight: 700;
-  letter-spacing: 0.01em;
-  max-height: 150px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+
+  letter-spacing: -0.02em;
+
   order: 3;
   margin-top: auto;
+  margin-bottom: 8px;
+
+  max-height: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .record-spine {
