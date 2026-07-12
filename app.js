@@ -605,20 +605,18 @@ async function deleteDraftRanking(rankingId) {
     .delete()
     .eq("ranking_id", rankingId);
 
-if (rankingError) {
-  console.error(rankingError);
-  alert(rankingError.message);
-  return;
-}
+
   const { error: rankingError } = await supabaseClient
     .from("rankings")
     .delete()
     .eq("id", rankingId)
     .eq("status", "draft");
 
-  if (rankingError) {
-    return showToast(rankingError.message);
-  }
+if (rankingError) {
+  console.error(rankingError);
+  alert(rankingError.message);
+  return;
+}
 
   await loadAll();
   showToast("Draft deleted");
