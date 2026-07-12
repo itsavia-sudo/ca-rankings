@@ -411,7 +411,7 @@ textarea {
   gap: 3px;
   overflow-x: auto;
   overflow-y: hidden;
-  padding: 18px 12px 28px;
+  padding: 18px 12px 0;
   min-height: 340px;
   border-bottom: 10px solid #b78d63;
 }
@@ -495,14 +495,48 @@ border-radius: 2px;
   max-height: 150px;
   overflow: hidden;
   text-overflow: ellipsis;
+  order: 3;
+  margin-top: auto;
 }
 
-.record-spine-meta {
-  margin-top: auto;
-  font-size: 11px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+.record-spine {
+  position: relative;
+  flex: 0 0 24px;
+  width: 24px;
+  min-width: 24px;
+  max-width: 24px;
+  overflow: hidden;
+  height: 270px;
+  padding: 12px 2px;
+  margin-bottom: -1px;
+
+  border: 1px solid rgba(23, 63, 53, 0.16);
+  border-radius: 2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,0.22) 0 2px,
+      transparent 2px calc(100% - 2px),
+      rgba(23,63,53,0.06) calc(100% - 2px)
+    ),
+    linear-gradient(180deg, #f3c9d3 0%, #efb5c4 100%);
+
+  box-shadow:
+    4px 5px 12px rgba(23, 63, 53, 0.12),
+    inset 1px 0 rgba(255,255,255,0.5);
+
+  color: var(--green);
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
 }
 
 .record-spine-date {
