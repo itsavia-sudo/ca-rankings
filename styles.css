@@ -490,7 +490,7 @@ border-radius: 2px;
   transform: rotate(180deg);
   font-size: 17px;
   line-height: 1.1;
-  font-weight: 900;
+  font-weight: 700;
   letter-spacing: -0.02em;
   max-height: 150px;
   overflow: hidden;
@@ -542,9 +542,9 @@ border-radius: 2px;
 .record-spine-date {
   writing-mode: vertical-rl;
   transform: rotate(180deg);
-  font-size: 9px;
+  font-size: 11px;
   line-height: 1;
-  margin-top: 6px;
+  margin-top: 4px;
 }
 
 .record-spine .status {
