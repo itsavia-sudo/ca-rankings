@@ -101,9 +101,10 @@ function renderNav() {
       <button onclick="go('/chen/dashboard')">Chen View</button>
     `
     : `
+    : `
       <button onclick="go('/chen/dashboard')">Dashboard</button>
       <button onclick="go('/chen/collection')">Ranking Collection</button>
-      <button onclick="go('/avia/dashboard')">Avia View</button>
+    `;
     `;
 }
 
