@@ -528,12 +528,12 @@ border-radius: 2px;
   border-radius: 2px;
 
   background:
-    linear-gradient(
-      90deg,
-      rgba(255,255,255,0.22) 0 2px,
-      transparent 2px calc(100% - 2px),
-      rgba(23,63,53,0.06) calc(100% - 2px)
-    ),
+linear-gradient(
+  90deg,
+  rgba(255,255,255,0.28) 0 7px,
+  transparent 7px calc(100% - 7px),
+  rgba(23,63,53,0.08) calc(100% - 7px)
+),
     linear-gradient(180deg, #f3c9d3 0%, #efb5c4 100%);
 
   box-shadow:
