@@ -618,8 +618,10 @@ const result = await supabaseClient
   .eq("status", "draft")
 .select();
 
+console.log("rankingId:", rankingId);
 console.log(result);
-
+console.log(state.rankings);
+  
 const rankingError = result.error;
 if (rankingError) {
   console.error(rankingError);
