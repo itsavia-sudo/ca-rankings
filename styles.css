@@ -486,23 +486,23 @@ border-radius: 2px;
 }
 
 .record-spine-title {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+
   writing-mode: vertical-rl;
   text-orientation: sideways;
-  transform: rotate(180deg);
+  transform: translateX(-50%) rotate(180deg);
 
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 600;
   line-height: 1;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  text-transform: none;
   white-space: nowrap;
 
-  order: 3;
-  margin-top: auto;
-  margin-bottom: 8px;
-
-  max-height: 145px;
+  max-height: 125px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -548,11 +548,19 @@ border-radius: 2px;
 }
 
 .record-spine-date {
+  position: absolute;
+  left: 50%;
+  top: 12px;
+
   writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  font-size: 11px;
+  text-orientation: sideways;
+  transform: translateX(-50%) rotate(180deg);
+
+  font-size: 9px;
+  font-weight: 500;
   line-height: 1;
-  margin-top: 4px;
+  color: rgba(23, 63, 53, 0.78);
+  white-space: nowrap;
 }
 
 .record-spine .status {
