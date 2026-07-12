@@ -343,34 +343,107 @@ function renderCollection() {
 
 function renderCreate() {
   if (state.role !== "avia") return renderDashboard();
-  renderShell("Create Ranking", "Start with only what matters: name, type, and songs.", `
-    <section class="card">
-      <form class="form" onsubmit="createRanking(event)">
-        <div class="field">
-          <label>Ranking Name</label>
-          <input id="rankingName" required placeholder="e.g. Arctic Monkeys Birthday Ranking" />
-        </div>
-        <div class="field">
-          <label>Ranking Type</label>
-          <select id="rankingType" onchange="toggleArtistField()">
-            <option value="artist">Artist Ranking</option>
-            <option value="mixed">Mixed Playlist</option>
-          </select>
-          <p class="helper">Artist Ranking: paste song titles only. Mixed Playlist: paste Song — Artist.</p>
-        </div>
-        <div class="field" id="artistField">
-          <label>Artist Name</label>
-          <input id="artistName" placeholder="e.g. Arctic Monkeys" />
-        </div>
-        <div class="field">
-          <label>Song List</label>
-          <textarea id="songList" required placeholder="One song per line"></textarea>
-          <p class="helper">For mixed playlists, use: Song Name — Artist Name. Spotify URLs can be added on the review screen.</p>
-        </div>
-        <button class="btn primary" type="submit">Import Songs</button>
-      </form>
-    </section>
-  `);
+
+  const draft = state.params.id
+    ? state.rankings.find(r => r.id === state.params.id && r.status === "draft")
+    : null;
+
+  const existingSongs = draft ? songsFor(draft.id) : [];
+
+  const songListValue = existingSongs.map(song => {
+    if (draft.type === "mixed") {
+      return `${song.title} — ${song.artist || ""}`;
+    }
+
+    return song.title;
+  }).join("\n");
+
+  renderShell(
+    draft ? "Edit Ranking" : "Create Ranking",
+    draft
+      ? "Update the ranking details or song list before publishing."
+      : "Start with only what matters: name, type, and songs.",
+    `
+      <section class="card">
+        <form
+          class="form"
+          onsubmit="${draft
+            ? `updateDraftRanking(event, '${draft.id}')`
+            : "createRanking(event)"
+          }"
+        >
+          <div class="field">
+            <label>Ranking Name</label>
+            <input
+              id="rankingName"
+              required
+              placeholder="e.g. Arctic Monkeys Birthday Ranking"
+              value="${escapeHtml(draft?.name || "")}"
+            />
+          </div>
+
+          <div class="field">
+            <label>Ranking Type</label>
+            <select id="rankingType" onchange="toggleArtistField()">
+              <option value="artist" ${draft?.type === "artist" ? "selected" : ""}>
+                Artist Ranking
+              </option>
+              <option value="mixed" ${draft?.type === "mixed" ? "selected" : ""}>
+                Mixed Playlist
+              </option>
+            </select>
+
+            <p class="helper">
+              Artist Ranking: paste song titles only. Mixed Playlist: paste Song — Artist.
+            </p>
+          </div>
+
+          <div
+            class="field"
+            id="artistField"
+            style="display:${draft?.type === "mixed" ? "none" : "grid"}"
+          >
+            <label>Artist Name</label>
+            <input
+              id="artistName"
+              placeholder="e.g. Arctic Monkeys"
+              value="${escapeHtml(draft?.artist_name || "")}"
+            />
+          </div>
+
+          <div class="field">
+            <label>Song List</label>
+            <textarea
+              id="songList"
+              required
+              placeholder="One song per line"
+            >${escapeHtml(songListValue)}</textarea>
+
+            <p class="helper">
+              For mixed playlists, use: Song Name — Artist Name.
+              Spotify URLs can be added on the review screen.
+            </p>
+          </div>
+
+          <div class="button-row">
+            <button class="btn primary" type="submit">
+              ${draft ? "Save Changes" : "Import Songs"}
+            </button>
+
+            ${draft ? `
+              <button
+                class="btn secondary"
+                type="button"
+                onclick="go('/avia/review/${draft.id}')"
+              >
+                Cancel
+              </button>
+            ` : ""}
+          </div>
+        </form>
+      </section>
+    `
+  );
 }
 
 function toggleArtistField() {
@@ -441,7 +514,115 @@ const { error: songsError } = await supabaseClient
   await loadAll();
   go(`/avia/review/${ranking.id}`);
 }
+async function updateDraftRanking(event, rankingId) {
+  event.preventDefault();
 
+  const ranking = state.rankings.find(
+    r => r.id === rankingId && r.status === "draft"
+  );
+
+  if (!ranking) {
+    return showToast("Draft ranking not found.");
+  }
+
+  const name = document.getElementById("rankingName").value.trim();
+  const type = document.getElementById("rankingType").value;
+  const artistName = document.getElementById("artistName").value.trim();
+
+  const songRows = parseSongs(
+    document.getElementById("songList").value,
+    type,
+    artistName
+  );
+
+  if (!songRows.length) {
+    return showToast("Please add at least one song.");
+  }
+
+  const { error: rankingError } = await supabaseClient
+    .from("rankings")
+    .update({
+      name,
+      type,
+      artist_name: type === "artist" ? artistName : null
+    })
+    .eq("id", rankingId)
+    .eq("status", "draft");
+
+  if (rankingError) {
+    return showToast(rankingError.message);
+  }
+
+  const { error: deleteSongsError } = await supabaseClient
+    .from("songs")
+    .delete()
+    .eq("ranking_id", rankingId);
+
+  if (deleteSongsError) {
+    return showToast(deleteSongsError.message);
+  }
+
+  showToast("Updating Spotify tracks...");
+
+  const songsWithSpotify = await Promise.all(
+    songRows.map(async song => ({
+      ...song,
+      ranking_id: rankingId,
+      spotify_url: await findSpotifyUrlForSong(song)
+    }))
+  );
+
+  const { error: insertSongsError } = await supabaseClient
+    .from("songs")
+    .insert(songsWithSpotify);
+
+  if (insertSongsError) {
+    return showToast(insertSongsError.message);
+  }
+
+  await loadAll();
+  showToast("Draft updated");
+  go(`/avia/review/${rankingId}`);
+}
+
+async function deleteDraftRanking(rankingId) {
+  const confirmed = window.confirm(
+    "Delete this draft? This action cannot be undone."
+  );
+
+  if (!confirmed) return;
+
+  const ranking = state.rankings.find(
+    r => r.id === rankingId && r.status === "draft"
+  );
+
+  if (!ranking) {
+    return showToast("Draft ranking not found.");
+  }
+
+  const { error: songsError } = await supabaseClient
+    .from("songs")
+    .delete()
+    .eq("ranking_id", rankingId);
+
+  if (songsError) {
+    return showToast(songsError.message);
+  }
+
+  const { error: rankingError } = await supabaseClient
+    .from("rankings")
+    .delete()
+    .eq("id", rankingId)
+    .eq("status", "draft");
+
+  if (rankingError) {
+    return showToast(rankingError.message);
+  }
+
+  await loadAll();
+  showToast("Draft deleted");
+  go("/avia/dashboard");
+}
 function duplicateWarnings(songList) {
   const seen = new Map();
   const dups = [];
@@ -488,10 +669,35 @@ ${s.spotify_url
           </article>
         `).join("")}
       </div>
-      <div class="button-row" style="margin-top:18px">
-        <button class="btn primary" onclick="publishRanking('${r.id}')">Publish Ranking</button>
-        <button class="btn secondary" onclick="go('/avia/dashboard')">Back</button>
-      </div>
+<div class="button-row" style="margin-top:18px">
+  <button
+    class="btn primary"
+    onclick="publishRanking('${r.id}')"
+  >
+    Publish Ranking
+  </button>
+
+  <button
+    class="btn secondary"
+    onclick="go('/avia/create/${r.id}')"
+  >
+    Edit Draft
+  </button>
+
+  <button
+    class="btn danger"
+    onclick="deleteDraftRanking('${r.id}')"
+  >
+    Delete Draft
+  </button>
+
+  <button
+    class="btn secondary"
+    onclick="go('/avia/dashboard')"
+  >
+    Back to Dashboard
+  </button>
+</div>
     </section>
   `);
 }
