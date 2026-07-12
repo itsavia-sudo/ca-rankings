@@ -323,10 +323,6 @@ function renderCollection() {
     ${escapeHtml(r.name)}
   </div>
 
-  <div class="record-spine-meta">
-    ${r.type === "artist" ? "Artist" : "Mixed"}
-  </div>
-
   <div class="record-spine-date">
     ${new Date(r.created_at).toLocaleDateString("en-GB", {
       day: "numeric",
