@@ -540,9 +540,11 @@ border-radius: 2px;
 }
 
 .record-spine-date {
-  margin-top: 4px;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
   font-size: 9px;
-  white-space: nowrap;
+  line-height: 1;
+  margin-top: 6px;
 }
 
 .record-spine .status {
