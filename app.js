@@ -48,10 +48,13 @@ function escapeHtml(value) {
 
 function parseHash() {
   const raw = location.hash.replace(/^#\/?/, "");
-  const parts = raw.split("/").filter(Boolean);
+  const pathOnly = raw.split("?")[0];
+  const parts = pathOnly.split("/").filter(Boolean);
+
   const role = parts[0] === "chen" ? "chen" : "avia";
   const route = parts[1] || "dashboard";
   const id = parts[2] || null;
+
   state.role = role;
   state.route = route;
   state.params = { id };
