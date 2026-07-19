@@ -853,8 +853,7 @@ function renderRate() {
         <strong>${rated} of ${list.length} tracks rated</strong>
       </div>
       <div class="pagination">
-     ${Array.from({length: pageCount}, (_, i) => `<button class="${i + 1 === page ? "active" : ""}" onclick="setRatingPage('${r.id}', ${i + 1})">${pageCount - i}</button>`).join("")}
-      </div>
+${Array.from({length: pageCount}, (_, i) => `<button class="${i + 1 === page ? "active" : ""}" onclick="setRatingPage('${r.id}', ${i + 1})">${i + 1}</button>`).join("")}      </div>
       <div class="list">
         ${pageSongs.map((s, i) => `
 ${rated > 0 && i === firstUnratedIndex ? `<div class="continue-marker">Continue here</div>` : ""}          <article class="row song-row ${scoreBySong[s.id] ? "rated" : ""}">
