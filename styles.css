@@ -734,14 +734,13 @@ linear-gradient(
   display: inline-block;
   border-radius: 50%;
 
-  background:
-    radial-gradient(
-      circle at center,
-      var(--yellow) 0 5px,
-      var(--cream) 6px 13px,
-      var(--pink) 14px 18px,
-      transparent 19px
-    ),
+background:
+  radial-gradient(
+    circle at center,
+    var(--cream-2) 0 13px,
+    var(--pink) 14px 18px,
+    transparent 19px
+  ),
     repeating-radial-gradient(
       circle at center,
       rgba(255, 255, 255, 0.12) 0 1px,
