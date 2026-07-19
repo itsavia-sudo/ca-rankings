@@ -737,9 +737,9 @@ linear-gradient(
 background:
   radial-gradient(
     circle at center,
-    var(--cream-2) 0 13px,
-    var(--pink) 14px 18px,
-    transparent 19px
+    var(--cream-2) 0 7px,
+    var(--pink) 8px 12px,
+    transparent 13px
   ),
     repeating-radial-gradient(
       circle at center,
